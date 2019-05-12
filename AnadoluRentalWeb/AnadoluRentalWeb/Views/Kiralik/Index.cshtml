@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AnadoluRental.Models.Models.Kiralik>
+@{
+    ViewBag.Title = "Kiralama Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<p>
+    @Html.ActionLink("Yeni Oluştur", "YeniOlustur")
+</p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Kiralanan Aracın IDsi</th>
+        <th>Kiralama Tarihi</th>
+        <th>Veriliş KMsi</th>
+        <th>Kiralama Bitiş Kmsi</th>
+        <th>Alınan Ücreti</th>
+        <th>Kiralayan Kull IDsi</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiraID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiralananAracID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiraTarihi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.verilisKM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiraBitisKM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiraAlinanUcret)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kiralayanKulID)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kiraID }) |
+                @Html.ActionLink("Sil", "Sil", new { id = item.kiraID })
+            </td>
+        </tr>
+    }
+</table>

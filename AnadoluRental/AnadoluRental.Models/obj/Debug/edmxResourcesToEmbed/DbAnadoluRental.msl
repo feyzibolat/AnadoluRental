@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbAnadoluRentalModelTESTStoreContainer" CdmEntityContainer="dbAnadoluRentalEntitiesTEST">
+    <EntitySetMapping Name="Aracs">
+      <EntityTypeMapping TypeName="dbAnadoluRentalModelTEST.Arac">
+        <MappingFragment StoreEntitySet="Arac">
+          <ScalarProperty Name="aracID" ColumnName="aracID" />
+          <ScalarProperty Name="aracMarka" ColumnName="aracMarka" />
+          <ScalarProperty Name="aracModel" ColumnName="aracModel" />
+          <ScalarProperty Name="gerekenEhliyetYasi" ColumnName="gerekenEhliyetYasi" />
+          <ScalarProperty Name="minYasSiniri" ColumnName="minYasSiniri" />
+          <ScalarProperty Name="gunlukSinirKM" ColumnName="gunlukSinirKM" />
+          <ScalarProperty Name="aracKM" ColumnName="aracKM" />
+          <ScalarProperty Name="airBagSayisi" ColumnName="airBagSayisi" />
+          <ScalarProperty Name="bagacHacmi" ColumnName="bagacHacmi" />
+          <ScalarProperty Name="koltukSayisi" ColumnName="koltukSayisi" />
+          <ScalarProperty Name="gunlukKiralikFiyati" ColumnName="gunlukKiralikFiyati" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kiraliks">
+      <EntityTypeMapping TypeName="dbAnadoluRentalModelTEST.Kiralik">
+        <MappingFragment StoreEntitySet="Kiralik">
+          <ScalarProperty Name="kiraID" ColumnName="kiraID" />
+          <ScalarProperty Name="kiralananAracID" ColumnName="kiralananAracID" />
+          <ScalarProperty Name="kiraTarihi" ColumnName="kiraTarihi" />
+          <ScalarProperty Name="verilisKM" ColumnName="verilisKM" />
+          <ScalarProperty Name="kiraBitisKM" ColumnName="kiraBitisKM" />
+          <ScalarProperty Name="kiraAlinanUcret" ColumnName="kiraAlinanUcret" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Musteris">
+      <EntityTypeMapping TypeName="dbAnadoluRentalModelTEST.Musteri">
+        <MappingFragment StoreEntitySet="Musteri">
+          <ScalarProperty Name="musteriID" ColumnName="musteriID" />
+          <ScalarProperty Name="musAdi" ColumnName="musAdi" />
+          <ScalarProperty Name="musSoyadi" ColumnName="musSoyadi" />
+          <ScalarProperty Name="musTel" ColumnName="musTel" />
+          <ScalarProperty Name="musAdres" ColumnName="musAdres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sirkets">
+      <EntityTypeMapping TypeName="dbAnadoluRentalModelTEST.Sirket">
+        <MappingFragment StoreEntitySet="Sirket">
+          <ScalarProperty Name="sirketID" ColumnName="sirketID" />
+          <ScalarProperty Name="sirketAdi" ColumnName="sirketAdi" />
+          <ScalarProperty Name="sirketSehir" ColumnName="sirketSehir" />
+          <ScalarProperty Name="sirketAdres" ColumnName="sirketAdres" />
+          <ScalarProperty Name="sirketAracSayisi" ColumnName="sirketAracSayisi" />
+          <ScalarProperty Name="sirketPuani" ColumnName="sirketPuani" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="dbAnadoluRentalModelTEST.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

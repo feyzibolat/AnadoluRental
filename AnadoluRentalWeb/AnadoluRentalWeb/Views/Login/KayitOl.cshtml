@@ -1,0 +1,59 @@
+﻿@model AnadoluRental.Models.Models.Kullanici
+@{
+    ViewBag.Title = "Kayit Ol";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="jumbotron" style="width:350px">
+
+    @using (Html.BeginForm("KayitEt", "Login", FormMethod.Post))
+    {
+        <div style="max-width: 400px;">
+            <h2 class="form-signin-heading">
+                Kayıt Ol
+            </h2>
+            <label>Kullanıcı Adı</label>
+            @Html.TextBoxFor(k => k.kullAdi, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.kullAdi, "", new { @class = "error" })
+            </div>
+            <br />
+            <label>Kullanıcı Şifresi</label>
+            @Html.PasswordFor(k => k.kullSifre, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.kullSifre, "", new { @class = "error" })
+            </div>
+            <br />
+            <label>Ad</label>
+            @Html.TextBoxFor(k => k.Ad, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.Ad, "", new { @class = "error" })
+            </div>
+            <br />
+            <label>Soyad</label>
+            @Html.TextBoxFor(k => k.Soyad, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.Soyad, "", new { @class = "error" })
+            </div>
+            <br />
+            <label>Telefon No</label>
+            @Html.TextBoxFor(k => k.TelNo, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.TelNo, "", new { @class = "error" })
+            </div>
+            <br />
+            <label>Adres</label>
+            @Html.TextBoxFor(k => k.Adres, new { @class = "form-control" })
+            <div>
+                @Html.ValidationMessageFor(k => k.Adres, "", new { @class = "error" })
+            </div>
+            <input type="hidden" name="ReturnUrl" value="@Request.QueryString["ReturnUrl"]" />
+            <br />
+            <input type="submit" value="Kayıt Ol" class="btn btn-primary" />
+            <br />
+            <br />
+        </div>
+    }
+
+</div>

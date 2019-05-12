@@ -1,0 +1,16 @@
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.DataAccess.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.DataAccess.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.CrossCutting.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.Models.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\Configuration.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\EntityFramework.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.CrossCutting.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.Models.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\AnadoluRental.Models.dll.config
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\Configuration.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\Configuration.xml
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\EntityFramework.xml
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\obj\Debug\AnadoluRental.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\obj\Debug\AnadoluRental.DataAccess.csproj.CopyComplete
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\obj\Debug\AnadoluRental.DataAccess.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\obj\Debug\AnadoluRental.DataAccess.pdb

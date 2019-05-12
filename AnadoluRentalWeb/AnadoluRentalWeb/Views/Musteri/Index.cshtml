@@ -1,0 +1,60 @@
+﻿@model IEnumerable<AnadoluRental.Models.Models.Kullanici>
+@{
+    ViewBag.Title = "Müşteri Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<p>
+    @Html.ActionLink("Yeni Oluştur", "YeniOlustur")
+</p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Kull Adı</th>
+        <th>Şifresi</th>
+        <th>RolID</th>
+        <th>Şirket IDsi</th>
+        <th>Müşteri Adı</th>
+        <th>Müşteri Soyadı</th>
+        <th>Telefonu</th>
+        <th>Adresi</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.kullaniciID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kullAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kullSifre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kullRolID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kullSirketID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Soyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adres)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kullaniciID }) |
+                @Html.ActionLink("Sil", "Sil", new { id = item.kullaniciID })
+            </td>
+        </tr>
+    }
+</table>

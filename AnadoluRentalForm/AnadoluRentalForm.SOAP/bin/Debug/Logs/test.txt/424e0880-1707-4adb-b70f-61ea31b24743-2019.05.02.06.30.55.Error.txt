@@ -1,0 +1,9 @@
+﻿--------------------[Core Exception]--------------------
+Source		: System.Data
+Method		: get_Int32
+Date		: 18:30:55
+Time		: 2.05.2019
+Error		: Veri null. Bu metot veya özellik Null değerler için çağrılamaz.
+Stack Trace	: konum: System.Data.SqlClient.SqlBuffer.get_Int32()
+   konum: System.Data.SqlClient.SqlDataReader.GetInt32(Int32 i)
+   konum: AnadoluRental.DataAccess.Concretes.KullaniciRepository.SelectAll() C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\Concretes\KullaniciRepository.cs içinde: satır 233

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AnadoluRental.Models.Models.Arac>
+@{
+    ViewBag.Title = "Araç Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+<p>
+    @Html.ActionLink("Yeni Oluştur", "YeniOlustur")
+</p>
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Aracın Markası</th>
+        <th>Aracın Modeli</th>
+        <th>Gereken Ehliyet Yaşı</th>
+        <th>Minimum Yaş Sınırı</th>
+        <th>Günlük Sınır KMsi</th>
+        <th>Aracın KMsi</th>
+        <th>Airbag Sayısı</th>
+        <th>Bagaj Hacmi</th>
+        <th>Koltuk Sayısı</th>
+        <th>Günlük Kiralik Fiyatı</th>
+        <th>Ait Olduğu Şirketi IDsi</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracMarka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minYasSiniri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gunlukSinirKM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracKM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.airBagSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bagacHacmi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.koltukSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aitOlduguSirketID)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID }) |
+                @Html.ActionLink("Sil", "Sil", new { id = item.aracID })
+            </td>
+        </tr>
+    }
+</table>

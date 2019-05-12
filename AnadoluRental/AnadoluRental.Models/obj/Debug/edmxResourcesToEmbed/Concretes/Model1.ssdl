@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbAnadoluRentalModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Arac">
+    <Key>
+      <PropertyRef Name="aracID" />
+    </Key>
+    <Property Name="aracID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="aracMarka" Type="varchar" MaxLength="50" />
+    <Property Name="aracModel" Type="varchar" MaxLength="50" />
+    <Property Name="gerekenEhliyetYasi" Type="int" />
+    <Property Name="minYasSiniri" Type="int" />
+    <Property Name="gunlukSinirKM" Type="int" />
+    <Property Name="aracKM" Type="int" />
+    <Property Name="airBagSayisi" Type="int" />
+    <Property Name="bagacHacmi" Type="int" />
+    <Property Name="koltukSayisi" Type="int" />
+    <Property Name="gunlukKiralikFiyati" Type="int" />
+  </EntityType>
+  <EntityType Name="Kiralik">
+    <Key>
+      <PropertyRef Name="kiraID" />
+    </Key>
+    <Property Name="kiraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kiralananAracID" Type="int" />
+    <Property Name="kiraTarihi" Type="date" />
+    <Property Name="verilisKM" Type="int" />
+    <Property Name="kiraBitisKM" Type="int" />
+    <Property Name="kiraAlinanUcret" Type="int" />
+  </EntityType>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="musteriID" />
+    </Key>
+    <Property Name="musteriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="musSoyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="musTel" Type="nvarchar" MaxLength="12" />
+    <Property Name="musAdres" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Sirket">
+    <Key>
+      <PropertyRef Name="sirketID" />
+    </Key>
+    <Property Name="sirketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="sirketAdi" Type="nvarchar" MaxLength="150" />
+    <Property Name="sirketSehir" Type="nvarchar" MaxLength="150" />
+    <Property Name="sirketAdres" Type="nvarchar" MaxLength="150" />
+    <Property Name="sirketAracSayisi" Type="int" />
+    <Property Name="sirketPuani" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Kiralik_Arac">
+    <End Role="Arac" Type="Self.Arac" Multiplicity="0..1" />
+    <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arac">
+        <PropertyRef Name="aracID" />
+      </Principal>
+      <Dependent Role="Kiralik">
+        <PropertyRef Name="kiralananAracID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbAnadoluRentalModel1StoreContainer">
+    <EntitySet Name="Arac" EntityType="Self.Arac" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kiralik" EntityType="Self.Kiralik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Musteri" EntityType="Self.Musteri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sirket" EntityType="Self.Sirket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Kiralik_Arac" Association="Self.FK_Kiralik_Arac">
+      <End Role="Arac" EntitySet="Arac" />
+      <End Role="Kiralik" EntitySet="Kiralik" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

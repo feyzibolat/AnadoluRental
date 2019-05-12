@@ -1,0 +1,8 @@
+﻿	--------------------[Wrap Exception]--------------------
+	Source		: AnadoluRental.DataAccess
+	Method		: DeletedById
+	Date		: 22:46:17
+	Time		: 2.05.2019
+	Error		: SirketRepository::Insert:Error occured.
+	Stack Trace	: konum: AnadoluRental.DataAccess.Concretes.SirketRepository.DeletedById(Int32 id) C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\Concretes\SirketRepository.cs içinde: satır 88
+   konum: AnadoluRental.Business.SirketBusiness.SirketSilById(Int32 sirketID) C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Business\Concretes\SirketBusiness.cs içinde: satır 59

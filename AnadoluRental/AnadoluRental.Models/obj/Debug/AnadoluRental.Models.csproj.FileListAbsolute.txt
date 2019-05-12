@@ -1,0 +1,14 @@
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.dll.config
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\Portable.DataAnnotations.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.xml
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\bin\Debug\Portable.DataAnnotations.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.csproj.CoreCompileInputs.cache
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.csproj.CopyComplete
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.csprojAssemblyReference.cache

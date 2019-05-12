@@ -1,0 +1,8 @@
+﻿	--------------------[Wrap Exception]--------------------
+	Source		: AnadoluRental.DataAccess
+	Method		: DeletedById
+	Date		: 13:30:58
+	Time		: 12.05.2019
+	Error		: KullaniciRepository::Insert:Error occured.
+	Stack Trace	: konum: AnadoluRental.DataAccess.Concretes.KullaniciRepository.DeletedById(Int32 id) C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\Concretes\KullaniciRepository.cs içinde: satır 88
+   konum: AnadoluRental.Business.KullaniciBusiness.KullaniciSilById(Int32 kullID) C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Business\Concretes\KullaniciBusiness.cs içinde: satır 59

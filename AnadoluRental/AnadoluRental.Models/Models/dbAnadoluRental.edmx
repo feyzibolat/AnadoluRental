@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dbAnadoluRentalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Arac">
+          <Key>
+            <PropertyRef Name="aracID" />
+          </Key>
+          <Property Name="aracID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aracMarka" Type="varchar" MaxLength="50" />
+          <Property Name="aracModel" Type="varchar" MaxLength="50" />
+          <Property Name="gerekenEhliyetYasi" Type="int" />
+          <Property Name="minYasSiniri" Type="int" />
+          <Property Name="gunlukSinirKM" Type="int" />
+          <Property Name="aracKM" Type="int" />
+          <Property Name="airBagSayisi" Type="int" />
+          <Property Name="bagacHacmi" Type="int" />
+          <Property Name="koltukSayisi" Type="int" />
+          <Property Name="gunlukKiralikFiyati" Type="int" />
+          <Property Name="aitOlduguSirketID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kiralik">
+          <Key>
+            <PropertyRef Name="kiraID" />
+          </Key>
+          <Property Name="kiraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kiralananAracID" Type="int" />
+          <Property Name="kiraTarihi" Type="date" />
+          <Property Name="verilisKM" Type="int" />
+          <Property Name="kiraBitisKM" Type="int" />
+          <Property Name="kiraAlinanUcret" Type="int" />
+          <Property Name="kiralayanKulID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullAdi" Type="nvarchar" MaxLength="100" />
+          <Property Name="kullSifre" Type="nvarchar" MaxLength="100" />
+          <Property Name="kullRolID" Type="int" />
+          <Property Name="kullSirketID" Type="int" />
+          <Property Name="Ad" Type="nvarchar" MaxLength="100" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="100" />
+          <Property Name="TelNo" Type="nvarchar" MaxLength="100" />
+          <Property Name="Adres" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rolAdi" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Sirket">
+          <Key>
+            <PropertyRef Name="sirketID" />
+          </Key>
+          <Property Name="sirketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sirketAdi" Type="nvarchar" MaxLength="150" />
+          <Property Name="sirketSehir" Type="nvarchar" MaxLength="150" />
+          <Property Name="sirketAdres" Type="nvarchar" MaxLength="150" />
+          <Property Name="sirketAracSayisi" Type="int" />
+          <Property Name="sirketPuani" Type="int" />
+        </EntityType>
+        <Association Name="FK_Arac_Sirket">
+          <End Role="Sirket" Type="Self.Sirket" Multiplicity="1" />
+          <End Role="Arac" Type="Self.Arac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sirket">
+              <PropertyRef Name="sirketID" />
+            </Principal>
+            <Dependent Role="Arac">
+              <PropertyRef Name="aitOlduguSirketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kiralik_Arac">
+          <End Role="Arac" Type="Self.Arac" Multiplicity="0..1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arac">
+              <PropertyRef Name="aracID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="kiralananAracID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kiralik_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="kiralayanKulID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanici_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="kullRolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbAnadoluRentalModelStoreContainer">
+          <EntitySet Name="Arac" EntityType="Self.Arac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kiralik" EntityType="Self.Kiralik" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sirket" EntityType="Self.Sirket" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Arac_Sirket" Association="Self.FK_Arac_Sirket">
+            <End Role="Sirket" EntitySet="Sirket" />
+            <End Role="Arac" EntitySet="Arac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kiralik_Arac" Association="Self.FK_Kiralik_Arac">
+            <End Role="Arac" EntitySet="Arac" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kiralik_Kullanici" Association="Self.FK_Kiralik_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Rol" Association="Self.FK_Kullanici_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbAnadoluRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Arac">
+          <Key>
+            <PropertyRef Name="aracID" />
+          </Key>
+          <Property Name="aracID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aracMarka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="aracModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="gerekenEhliyetYasi" Type="Int32" />
+          <Property Name="minYasSiniri" Type="Int32" />
+          <Property Name="gunlukSinirKM" Type="Int32" />
+          <Property Name="aracKM" Type="Int32" />
+          <Property Name="airBagSayisi" Type="Int32" />
+          <Property Name="bagacHacmi" Type="Int32" />
+          <Property Name="koltukSayisi" Type="Int32" />
+          <Property Name="gunlukKiralikFiyati" Type="Int32" />
+          <Property Name="aitOlduguSirketID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sirket" Relationship="Self.FK_Arac_Sirket" FromRole="Arac" ToRole="Sirket" />
+          <NavigationProperty Name="Kiralik" Relationship="Self.FK_Kiralik_Arac" FromRole="Arac" ToRole="Kiralik" />
+        </EntityType>
+        <EntityType Name="Kiralik">
+          <Key>
+            <PropertyRef Name="kiraID" />
+          </Key>
+          <Property Name="kiraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kiralananAracID" Type="Int32" />
+          <Property Name="kiraTarihi" Type="DateTime" Precision="0" />
+          <Property Name="verilisKM" Type="Int32" />
+          <Property Name="kiraBitisKM" Type="Int32" />
+          <Property Name="kiraAlinanUcret" Type="Int32" />
+          <Property Name="kiralayanKulID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Arac" Relationship="Self.FK_Kiralik_Arac" FromRole="Kiralik" ToRole="Arac" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Kiralik_Kullanici" FromRole="Kiralik" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Kullanici">
+          <Key>
+            <PropertyRef Name="kullaniciID" />
+          </Key>
+          <Property Name="kullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="kullSifre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="kullRolID" Type="Int32" />
+          <Property Name="kullSirketID" Type="Int32" />
+          <Property Name="Ad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Soyad" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TelNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kiralik" Relationship="Self.FK_Kiralik_Kullanici" FromRole="Kullanici" ToRole="Kiralik" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Kullanici_Rol" FromRole="Kullanici" ToRole="Rol" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="rolID" />
+          </Key>
+          <Property Name="rolID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rolAdi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kullanici" Relationship="Self.FK_Kullanici_Rol" FromRole="Rol" ToRole="Kullanici" />
+        </EntityType>
+        <EntityType Name="Sirket">
+          <Key>
+            <PropertyRef Name="sirketID" />
+          </Key>
+          <Property Name="sirketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sirketAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="sirketSehir" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="sirketAdres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="sirketAracSayisi" Type="Int32" />
+          <Property Name="sirketPuani" Type="Int32" />
+          <NavigationProperty Name="Arac" Relationship="Self.FK_Arac_Sirket" FromRole="Sirket" ToRole="Arac" />
+        </EntityType>
+        <Association Name="FK_Arac_Sirket">
+          <End Role="Sirket" Type="Self.Sirket" Multiplicity="1" />
+          <End Role="Arac" Type="Self.Arac" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sirket">
+              <PropertyRef Name="sirketID" />
+            </Principal>
+            <Dependent Role="Arac">
+              <PropertyRef Name="aitOlduguSirketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kiralik_Arac">
+          <End Role="Arac" Type="Self.Arac" Multiplicity="0..1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Arac">
+              <PropertyRef Name="aracID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="kiralananAracID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kiralik_Kullanici">
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="1" />
+          <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kullanici">
+              <PropertyRef Name="kullaniciID" />
+            </Principal>
+            <Dependent Role="Kiralik">
+              <PropertyRef Name="kiralayanKulID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kullanici_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Kullanici" Type="Self.Kullanici" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="rolID" />
+            </Principal>
+            <Dependent Role="Kullanici">
+              <PropertyRef Name="kullRolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbAnadoluRentalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Arac" EntityType="Self.Arac" />
+          <EntitySet Name="Kiralik" EntityType="Self.Kiralik" />
+          <EntitySet Name="Kullanici" EntityType="Self.Kullanici" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="Sirket" EntityType="Self.Sirket" />
+          <AssociationSet Name="FK_Arac_Sirket" Association="Self.FK_Arac_Sirket">
+            <End Role="Sirket" EntitySet="Sirket" />
+            <End Role="Arac" EntitySet="Arac" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kiralik_Arac" Association="Self.FK_Kiralik_Arac">
+            <End Role="Arac" EntitySet="Arac" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kiralik_Kullanici" Association="Self.FK_Kiralik_Kullanici">
+            <End Role="Kullanici" EntitySet="Kullanici" />
+            <End Role="Kiralik" EntitySet="Kiralik" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kullanici_Rol" Association="Self.FK_Kullanici_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Kullanici" EntitySet="Kullanici" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbAnadoluRentalModelStoreContainer" CdmEntityContainer="dbAnadoluRentalEntities">
+          <EntitySetMapping Name="Arac">
+            <EntityTypeMapping TypeName="dbAnadoluRentalModel.Arac">
+              <MappingFragment StoreEntitySet="Arac">
+                <ScalarProperty Name="aracID" ColumnName="aracID" />
+                <ScalarProperty Name="aracMarka" ColumnName="aracMarka" />
+                <ScalarProperty Name="aracModel" ColumnName="aracModel" />
+                <ScalarProperty Name="gerekenEhliyetYasi" ColumnName="gerekenEhliyetYasi" />
+                <ScalarProperty Name="minYasSiniri" ColumnName="minYasSiniri" />
+                <ScalarProperty Name="gunlukSinirKM" ColumnName="gunlukSinirKM" />
+                <ScalarProperty Name="aracKM" ColumnName="aracKM" />
+                <ScalarProperty Name="airBagSayisi" ColumnName="airBagSayisi" />
+                <ScalarProperty Name="bagacHacmi" ColumnName="bagacHacmi" />
+                <ScalarProperty Name="koltukSayisi" ColumnName="koltukSayisi" />
+                <ScalarProperty Name="gunlukKiralikFiyati" ColumnName="gunlukKiralikFiyati" />
+                <ScalarProperty Name="aitOlduguSirketID" ColumnName="aitOlduguSirketID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kiralik">
+            <EntityTypeMapping TypeName="dbAnadoluRentalModel.Kiralik">
+              <MappingFragment StoreEntitySet="Kiralik">
+                <ScalarProperty Name="kiraID" ColumnName="kiraID" />
+                <ScalarProperty Name="kiralananAracID" ColumnName="kiralananAracID" />
+                <ScalarProperty Name="kiraTarihi" ColumnName="kiraTarihi" />
+                <ScalarProperty Name="verilisKM" ColumnName="verilisKM" />
+                <ScalarProperty Name="kiraBitisKM" ColumnName="kiraBitisKM" />
+                <ScalarProperty Name="kiraAlinanUcret" ColumnName="kiraAlinanUcret" />
+                <ScalarProperty Name="kiralayanKulID" ColumnName="kiralayanKulID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kullanici">
+            <EntityTypeMapping TypeName="dbAnadoluRentalModel.Kullanici">
+              <MappingFragment StoreEntitySet="Kullanici">
+                <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+                <ScalarProperty Name="kullAdi" ColumnName="kullAdi" />
+                <ScalarProperty Name="kullSifre" ColumnName="kullSifre" />
+                <ScalarProperty Name="kullRolID" ColumnName="kullRolID" />
+                <ScalarProperty Name="kullSirketID" ColumnName="kullSirketID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="dbAnadoluRentalModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="rolID" ColumnName="rolID" />
+                <ScalarProperty Name="rolAdi" ColumnName="rolAdi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sirket">
+            <EntityTypeMapping TypeName="dbAnadoluRentalModel.Sirket">
+              <MappingFragment StoreEntitySet="Sirket">
+                <ScalarProperty Name="sirketID" ColumnName="sirketID" />
+                <ScalarProperty Name="sirketAdi" ColumnName="sirketAdi" />
+                <ScalarProperty Name="sirketSehir" ColumnName="sirketSehir" />
+                <ScalarProperty Name="sirketAdres" ColumnName="sirketAdres" />
+                <ScalarProperty Name="sirketAracSayisi" ColumnName="sirketAracSayisi" />
+                <ScalarProperty Name="sirketPuani" ColumnName="sirketPuani" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

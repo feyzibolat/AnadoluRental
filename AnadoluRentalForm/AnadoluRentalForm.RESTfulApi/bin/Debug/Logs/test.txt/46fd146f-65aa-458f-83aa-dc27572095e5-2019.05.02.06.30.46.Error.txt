@@ -1,0 +1,8 @@
+﻿	--------------------[Wrap Exception]--------------------
+	Source		: AnadoluRental.DataAccess
+	Method		: SelectAll
+	Date		: 18:30:46
+	Time		: 2.05.2019
+	Error		: KullaniciRepository::SelectAll:Error occured.
+	Stack Trace	: konum: AnadoluRental.DataAccess.Concretes.KullaniciRepository.SelectAll() C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.DataAccess\Concretes\KullaniciRepository.cs içinde: satır 256
+   konum: AnadoluRental.Business.KullaniciBusiness.SelectAllKullanici() C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.Business\Concretes\KullaniciBusiness.cs içinde: satır 98

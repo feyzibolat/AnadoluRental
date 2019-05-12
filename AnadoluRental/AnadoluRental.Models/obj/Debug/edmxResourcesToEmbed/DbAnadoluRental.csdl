@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbAnadoluRentalModelTEST" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Arac">
+    <Key>
+      <PropertyRef Name="aracID" />
+    </Key>
+    <Property Name="aracID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aracMarka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="aracModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="gerekenEhliyetYasi" Type="Int32" />
+    <Property Name="minYasSiniri" Type="Int32" />
+    <Property Name="gunlukSinirKM" Type="Int32" />
+    <Property Name="aracKM" Type="Int32" />
+    <Property Name="airBagSayisi" Type="Int32" />
+    <Property Name="bagacHacmi" Type="Int32" />
+    <Property Name="koltukSayisi" Type="Int32" />
+    <Property Name="gunlukKiralikFiyati" Type="Int32" />
+    <NavigationProperty Name="Kiraliks" Relationship="Self.FK_Kiralik_Arac" FromRole="Arac" ToRole="Kiralik" />
+  </EntityType>
+  <EntityType Name="Kiralik">
+    <Key>
+      <PropertyRef Name="kiraID" />
+    </Key>
+    <Property Name="kiraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kiralananAracID" Type="Int32" />
+    <Property Name="kiraTarihi" Type="DateTime" Precision="0" />
+    <Property Name="verilisKM" Type="Int32" />
+    <Property Name="kiraBitisKM" Type="Int32" />
+    <Property Name="kiraAlinanUcret" Type="Int32" />
+    <NavigationProperty Name="Arac" Relationship="Self.FK_Kiralik_Arac" FromRole="Kiralik" ToRole="Arac" />
+  </EntityType>
+  <EntityType Name="Musteri">
+    <Key>
+      <PropertyRef Name="musteriID" />
+    </Key>
+    <Property Name="musteriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="musAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="musSoyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="musTel" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+    <Property Name="musAdres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Sirket">
+    <Key>
+      <PropertyRef Name="sirketID" />
+    </Key>
+    <Property Name="sirketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sirketAdi" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="sirketSehir" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="sirketAdres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="sirketAracSayisi" Type="Int32" />
+    <Property Name="sirketPuani" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Kiralik_Arac">
+    <End Role="Arac" Type="Self.Arac" Multiplicity="0..1" />
+    <End Role="Kiralik" Type="Self.Kiralik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Arac">
+        <PropertyRef Name="aracID" />
+      </Principal>
+      <Dependent Role="Kiralik">
+        <PropertyRef Name="kiralananAracID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbAnadoluRentalEntitiesTEST" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aracs" EntityType="Self.Arac" />
+    <EntitySet Name="Kiraliks" EntityType="Self.Kiralik" />
+    <EntitySet Name="Musteris" EntityType="Self.Musteri" />
+    <EntitySet Name="Sirkets" EntityType="Self.Sirket" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <AssociationSet Name="FK_Kiralik_Arac" Association="Self.FK_Kiralik_Arac">
+      <End Role="Arac" EntitySet="Aracs" />
+      <End Role="Kiralik" EntitySet="Kiraliks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

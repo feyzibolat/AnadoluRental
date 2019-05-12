@@ -1,0 +1,91 @@
+﻿@using AnadoluRentalWeb.AnadoluRentalKullaniciService;
+@{
+    int gelenKullRolID = 0;
+    Kullanici gelenK = (Kullanici)Session["kull"];
+    if (gelenK == null)
+    {
+        gelenKullRolID = 0;
+    }
+    else
+    {
+        gelenKullRolID = (int)gelenK.kullRolID;
+    }
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - AnadoluRental</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AnadoluRental", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @if (gelenK != null) // Giriş Yapıldıysa
+                    {
+                        if (gelenK.kullRolID == 1) //Admin ise..
+                        {
+                            <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
+                            <li>@Html.ActionLink("Müşteriler", "Index", "Musteri")</li>
+                            <li>@Html.ActionLink("Şirketler", "Index", "Sirket")</li>
+                        }
+                        else if (gelenK.kullRolID == 2 || gelenK.kullRolID == 3) //Yönetici veya Çalışan ise..
+                        {
+                            <li>@Html.ActionLink("Şirketin Araçları", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
+                            <li>@Html.ActionLink("Müşteriler", "Index", "Musteri")</li>
+                        }
+                        else if (gelenK.kullRolID == 4) // Müşteri ise..
+                        {
+                            <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
+                        }
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
+                    }
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (gelenKullRolID == 0)
+                    {
+                        <li>@Html.ActionLink("Kayıt Ol", "KayitOl", "Login")</li>
+                        <li>@Html.ActionLink("Giriş Yap", "Index", "Login")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Hoşgeldiniz, " + @gelenK.Ad + " " + @gelenK.Soyad, "")</li>
+                        <li> @Html.ActionLink("Profilim", "Index", "Profil") </li>
+                        <li> @Html.ActionLink("Çıkış", "Logout", "Login") </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - AnadoluRental</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

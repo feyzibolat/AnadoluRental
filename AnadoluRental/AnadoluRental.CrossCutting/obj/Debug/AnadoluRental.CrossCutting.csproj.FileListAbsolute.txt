@@ -1,0 +1,10 @@
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\AnadoluRental.CrossCutting.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\AnadoluRental.CrossCutting.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\Configuration.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\Configuration.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\Configuration.xml
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\obj\Debug\AnadoluRental.CrossCutting.csproj.CoreCompileInputs.cache
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\obj\Debug\AnadoluRental.CrossCutting.csproj.CopyComplete
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\obj\Debug\AnadoluRental.CrossCutting.dll
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\obj\Debug\AnadoluRental.CrossCutting.pdb
+C:\Users\PCX\Desktop\AnadoluRental\AnadoluRental.CrossCutting\obj\Debug\AnadoluRental.CrossCutting.csprojAssemblyReference.cache
