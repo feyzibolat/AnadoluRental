@@ -2,9 +2,15 @@
 using AnadoluRental.CrossCutting.Concretes.Helper;
 using AnadoluRental.CrossCutting.Concretes.Logger;
 using AnadoluRental.Models.Models;
+using AnadoluRentalWeb.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,13 +18,35 @@ namespace AnadoluRentalWeb.Controllers
 {
     public class SirketController : Controller
     {
+
+        string Baseurl = "http://localhost:54361/";
+
         // GET: Sirket
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             try
             {
-                IList<Sirket> sirketListesi = SelectAllSirket().ToList();
-                return View(sirketListesi);
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    IList<Sirket> sirketListesi = null;
+                    using (var result = await client.GetAsync("api/Sirket"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            sirketListesi = JsonConvert.DeserializeObject<ResponseContent<Sirket>>(value).Data.ToList();
+                        }
+                    }
+                    return View(sirketListesi);
+                }
             }
             catch (Exception ex)
             {
@@ -30,29 +58,58 @@ namespace AnadoluRentalWeb.Controllers
         // GET: Sirket/Goruntule/5
         public ActionResult Goruntule(int id)
         {
-            return View(SirketSecById(id));
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
+            return View(id);
         }
 
         // GET: Sirket/YeniOlustur
         public ActionResult YeniOlustur()
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
 
         // POST: Sirket/YeniOlustur
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult YeniOlustur(FormCollection collection)
+        public async Task<ActionResult> YeniOlustur(FormCollection collection)
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
             {
                 return View();
             }
             try
             {
-                if (SirketEkle(collection["sirketAdi"], collection["sirketSehir"], collection["sirketAdres"], int.Parse(collection["sirketAracSayisi"]), int.Parse(collection["sirketPuani"])))
-                    return RedirectToAction("Index");
-                return View();
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    Sirket sirket = new Sirket()
+                    {
+                        sirketAdi = collection["sirketAdi"],
+                        sirketSehir = collection["sirketSehir"],
+                        sirketAracSayisi = int.Parse(collection["sirketAracSayisi"]),
+                        sirketPuani = int.Parse(collection["sirketPuani"]),
+                        sirketAdres = collection["sirketAdres"]
+                    };
+
+                    var serializedProduct = JsonConvert.SerializeObject(sirket);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync("api/Sirket", content);
+                    if (result.IsSuccessStatusCode)
+                        return RedirectToAction("Index");
+                    return View();
+                }
             }
             catch (Exception ex)
             {
@@ -62,11 +119,35 @@ namespace AnadoluRentalWeb.Controllers
         }
 
         // GET: Sirket/Duzenle/41
-        public ActionResult Duzenle(int id)
+        public async Task<ActionResult> Duzenle(int id)
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             try
             {
-                return View(SirketSecById(id));
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    Sirket sirket = null;
+
+                    using (var result = await client.GetAsync("api/Sirket/" + id))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            sirket = JsonConvert.DeserializeObject<ResponseContent<Sirket>>(value).Data.ToList().First();
+
+                            return View(sirket);
+                        }
+                    }
+                }
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -77,18 +158,42 @@ namespace AnadoluRentalWeb.Controllers
 
         // POST: Sirket/Duzenle/41
         [HttpPost]
-        public ActionResult Duzenle(int id, FormCollection collection)
+        public async Task<ActionResult> Duzenle(int id, FormCollection collection)
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             if (!ModelState.IsValid)
             {
                 return View();
             }
             try
             {
-                if (SirketGuncelle(id, collection["sirketAdi"], collection["sirketSehir"], collection["sirketAdres"], int.Parse(collection["sirketAracSayisi"]), int.Parse(collection["sirketPuani"])))
-                    return RedirectToAction("Index");
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return View();
+                    Sirket sirket = new Sirket()
+                    {
+                        sirketID = id,
+                        sirketAdi = collection["sirketAdi"],
+                        sirketSehir = collection["sirketSehir"],
+                        sirketAracSayisi = int.Parse(collection["sirketAracSayisi"]),
+                        sirketPuani = int.Parse(collection["sirketPuani"]),
+                        sirketAdres = collection["sirketAdres"]
+                    };
+
+                    var serializedProduct = JsonConvert.SerializeObject(sirket);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PutAsync("api/Sirket/" + id, content);
+                    if (result.IsSuccessStatusCode)
+                        return RedirectToAction("Index");
+
+                    return View();
+                }
             }
             catch
             {
@@ -97,13 +202,25 @@ namespace AnadoluRentalWeb.Controllers
         }
 
         // GET: Sirket/Sil/41
-        public ActionResult Sil(int id)
+        public async Task<ActionResult> Sil(int id)
         {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
             try
             {
-                if (SirketSilById(id))
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var result = await client.DeleteAsync("api/Sirket/" + id);
+                    if (result.IsSuccessStatusCode)
+                        return RedirectToAction("Index");
                     return RedirectToAction("Index");
-                return RedirectToAction("Index");
+                }
             }
             catch (Exception ex)
             {
@@ -111,156 +228,5 @@ namespace AnadoluRentalWeb.Controllers
                 throw new Exception("Hata Oluştu", ex);
             }
         }
-
-        #region CRUD OPERATIONS
-
-        private bool SirketEkle(string sirketAdi, string sirketSehir, string sirketAdres, int sirketAracSayisi, int sirketPuani)
-        {
-            try
-            {
-                using (var sirketBusiness = new SirketBusiness())
-                {
-                    return sirketBusiness.SirketEkle(new Sirket()
-                    {
-                        sirketAdi = sirketAdi,
-                        sirketSehir = sirketSehir,
-                        sirketAdres = sirketAdres,
-                        sirketAracSayisi = sirketAracSayisi,
-                        sirketPuani = sirketPuani
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                throw new Exception("Hata Oluştu" + ex.Message);
-            }
-        }
-
-        private bool SirketGuncelle(int sirketID, string sirketAdi, string sirketSehir, string sirketAdres, int sirketAracSayisi, int sirketPuani)
-        {
-            try
-            {
-                using (var sirketBusiness = new SirketBusiness())
-                {
-                    return sirketBusiness.SirketGuncelle(new Sirket()
-                    {
-                        sirketID = sirketID,
-                        sirketAdi = sirketAdi,
-                        sirketSehir = sirketSehir,
-                        sirketAdres = sirketAdres,
-                        sirketAracSayisi = sirketAracSayisi,
-                        sirketPuani = sirketPuani
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                throw new Exception("Hata Oluştu" + ex.Message);
-            }
-        }
-
-        private bool SirketSilById(int ID)
-        {
-            try
-            {
-                using (var sirketBusiness = new SirketBusiness())
-                {
-                    return sirketBusiness.SirketSilById(ID);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                throw new Exception("Hata Oluştu" + ex.Message);
-            }
-        }
-
-        private List<Sirket> SelectAllSirket()
-        {
-            try
-            {
-                using (var sirketBusiness = new SirketBusiness())
-                {
-                    List<Sirket> sirketList = new List<Sirket>();
-                    foreach (var sirket in sirketBusiness.SelectAllSirket().OrderBy(x => x.sirketID).ToList())
-                    {
-                        Sirket secMus = new Sirket()
-                        {
-                            sirketID = sirket.sirketID,
-                            sirketAdi = sirket.sirketAdi,
-                            sirketSehir = sirket.sirketSehir,
-                            sirketAdres = sirket.sirketAdres,
-                            sirketAracSayisi = sirket.sirketAracSayisi,
-                            sirketPuani = sirket.sirketPuani
-                        };
-                        sirketList.Add(secMus);
-                    }
-                    return sirketList;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                throw new Exception("Hata Oluştu" + ex.Message);
-            }
-        }
-
-        private Sirket SirketSecById(int ID)
-        {
-            try
-            {
-                using (var sirketBusiness = new SirketBusiness())
-                {
-                    Sirket sirket = null;
-                    Sirket donenSirket = sirketBusiness.SirketSecById(ID);
-                    if (donenSirket != null)
-                    {
-                        sirket = new Sirket()
-                        {
-                            sirketID = donenSirket.sirketID,
-                            sirketAdi = donenSirket.sirketAdi,
-                            sirketSehir = donenSirket.sirketSehir,
-                            sirketAdres = donenSirket.sirketAdres,
-                            sirketAracSayisi = donenSirket.sirketAracSayisi,
-                            sirketPuani = donenSirket.sirketPuani
-                        };
-                        List<Arac> sirketAraclari = new List<Arac>();
-                        foreach (var gelenArac in donenSirket.Arac)
-                        {
-                            sirketAraclari.Add(new Arac()
-                            {
-                                aracID = gelenArac.aracID,
-                                aracMarka = gelenArac.aracMarka,
-                                aracModel = gelenArac.aracModel,
-                                aracKM = gelenArac.aracKM,
-                                airBagSayisi = gelenArac.airBagSayisi,
-                                aitOlduguSirketID = gelenArac.aitOlduguSirketID,
-                                bagacHacmi = gelenArac.bagacHacmi,
-                                gerekenEhliyetYasi = gelenArac.gerekenEhliyetYasi,
-                                gunlukKiralikFiyati = gelenArac.gunlukKiralikFiyati,
-                                gunlukSinirKM = gelenArac.gunlukSinirKM,
-                                koltukSayisi = gelenArac.koltukSayisi,
-                                minYasSiniri = gelenArac.minYasSiniri,
-                                Sirket = sirket
-                            });
-                        }
-
-                        //sirket.Arac.AddRange(sirketAraclari);
-                    }
-
-                    return sirket;
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                throw new Exception("Hata Oluştu" + ex.Message);
-            }
-        }
-
-        #endregion
-
     }
 }

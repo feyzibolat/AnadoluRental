@@ -1,4 +1,4 @@
-﻿@using AnadoluRentalWeb.AnadoluRentalKullaniciService;
+﻿@using AnadoluRental.Models.Models;
 @{
     int gelenKullRolID = 0;
     Kullanici gelenK = (Kullanici)Session["kull"];
@@ -39,11 +39,18 @@
                         if (gelenK.kullRolID == 1) //Admin ise..
                         {
                             <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
-                            <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
-                            <li>@Html.ActionLink("Müşteriler", "Index", "Musteri")</li>
-                            <li>@Html.ActionLink("Şirketler", "Index", "Sirket")</li>
+                            <li>@Html.ActionLink("Tüm Kiralananlar", "Index", "Kiralik")</li>
+                            <li>@Html.ActionLink("Tüm Müşteriler", "Index", "Musteri")</li>
+                            <li>@Html.ActionLink("Tüm Şirketler", "Index", "Sirket")</li>
                         }
-                        else if (gelenK.kullRolID == 2 || gelenK.kullRolID == 3) //Yönetici veya Çalışan ise..
+                        else if (gelenK.kullRolID == 2) //Yönetici ise..
+                        {
+                            <li>@Html.ActionLink("Şirketin Araçları", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
+                            <li>@Html.ActionLink("Çalışanlar", "")</li>
+                            <li>@Html.ActionLink("Müşteriler", "Index", "Musteri")</li>
+                        }
+                        else if (gelenK.kullRolID == 3) //Çalışan ise..
                         {
                             <li>@Html.ActionLink("Şirketin Araçları", "Index", "Arac")</li>
                             <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
@@ -51,13 +58,13 @@
                         }
                         else if (gelenK.kullRolID == 4) // Müşteri ise..
                         {
-                            <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Araç Kirala", "Index", "Arac")</li>
                         }
 
                     }
-                    else
+                    else // Giriş yapılmadıysa
                     {
-                        <li>@Html.ActionLink("Tüm Araçlar", "Index", "Arac")</li>
+                        <li>@Html.ActionLink("Araç Listesi", "Index", "Arac")</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

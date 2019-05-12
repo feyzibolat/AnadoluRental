@@ -1,7 +1,13 @@
-﻿using AnadoluRentalWeb.AnadoluRentalKullaniciService;
+﻿using AnadoluRental.Models.Models;
+using AnadoluRentalWeb.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,6 +15,9 @@ namespace AnadoluRentalWeb.Controllers
 {
     public class LoginController : Controller
     {
+
+        string Baseurl = "http://localhost:54361/";
+
         // GET: Login
         public ActionResult Index()
         {
@@ -31,13 +40,17 @@ namespace AnadoluRentalWeb.Controllers
 
         // POST: Kayıt Et
         [HttpPost]
-        public ActionResult KayitEt(FormCollection collection)
+        public async Task<ActionResult> KayitEt(FormCollection collection)
         {
             if (Session["kull"] == null)
             {
-                using (var kullSoapClient = new KullaniciWebServiceSoapClient())
+                using (var client = new HttpClient())
                 {
-                    if (kullSoapClient.KullaniciEkle(new Kullanici()
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    Kullanici kull = new Kullanici()
                     {
                         kullAdi = collection["kullAdi"],
                         kullSifre = collection["kullSifre"],
@@ -47,7 +60,13 @@ namespace AnadoluRentalWeb.Controllers
                         Soyad = collection["Soyad"],
                         TelNo = collection["TelNo"],
                         Adres = collection["Adres"]
-                    }))
+                    };
+
+                    var serializedProduct = JsonConvert.SerializeObject(kull);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync("api/Kullanici", content);
+                    
+                    if (result.IsSuccessStatusCode)
                         RedirectToAction("Index", "Login");
                     else
                         RedirectToAction("KayitOl", "Login");
@@ -56,31 +75,29 @@ namespace AnadoluRentalWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
         // POST: Login Kontrolü
         [HttpPost]
-        public ActionResult Kontrol(FormCollection collection)
+        public async Task<ActionResult> Kontrol(FormCollection collection)
         {
             if (Session["kull"] == null)
             {
-                using (var kullSoapClient = new KullaniciWebServiceSoapClient())
+                using (var client = new HttpClient())
                 {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
                     List<Kullanici> kullanicilar = new List<Kullanici>();
-                    foreach (var responsedKullanici in kullSoapClient.SelectAllKullanici().OrderBy(x => x.kullaniciID).ToList())
+
+                    using (var result = await client.GetAsync("api/Kullanici"))
                     {
-                        Kullanici kull = new Kullanici()
+                        if (result.IsSuccessStatusCode)
                         {
-                            kullaniciID = responsedKullanici.kullaniciID,
-                            kullAdi = responsedKullanici.kullAdi,
-                            kullSifre = responsedKullanici.kullSifre,
-                            kullRolID = responsedKullanici.kullRolID,
-                            kullSirketID = responsedKullanici.kullSirketID,
-                            Ad = responsedKullanici.Ad,
-                            Soyad = responsedKullanici.Soyad,
-                            TelNo = responsedKullanici.TelNo,
-                            Adres = responsedKullanici.Adres
-                        };
-                        kullanicilar.Add(kull);
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            kullanicilar = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
+                        }
                     }
 
                     foreach (Kullanici kull in kullanicilar)
@@ -91,9 +108,8 @@ namespace AnadoluRentalWeb.Controllers
                             return RedirectToAction("Index", "Home");
                         }
                     }
-
-                    return RedirectToAction("Index", "Login");
                 }
+                return RedirectToAction("Index", "Login");
             }
             return RedirectToAction("Index", "Home");
         }
