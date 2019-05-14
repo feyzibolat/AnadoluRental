@@ -34,8 +34,19 @@
     <Reference Include="AnadoluRental.CrossCutting">
       <HintPath>..\AnadoluRental.CrossCutting\bin\Debug\AnadoluRental.CrossCutting.dll</HintPath>
     </Reference>
-    <Reference Include="AnadoluRental.Models">
+    <Reference Include="AnadoluRental.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AnadoluRental.Models\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\AnadoluRental.Models\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Portable.DataAnnotations">
+      <HintPath>..\AnadoluRental.Models\bin\Debug\Portable.DataAnnotations.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +61,7 @@
     <Compile Include="Abstractions\IRepository.cs" />
     <Compile Include="Concretes\AracRepository.cs" />
     <Compile Include="Concretes\KullaniciRepository.cs" />
+    <Compile Include="Concretes\RolRepository.cs" />
     <Compile Include="Concretes\SirketRepository.cs" />
     <Compile Include="Concretes\KiralikRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

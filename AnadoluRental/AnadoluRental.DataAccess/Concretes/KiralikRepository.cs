@@ -235,6 +235,14 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.kiraBitisKM = reader.GetInt32(4);
                                     entity.kiraAlinanUcret = reader.GetInt32(5);
                                     entity.kiralayanKulID = reader.GetInt32(6);
+
+                                    entity.Kullanici = new KullaniciRepository().SelectedById(entity.kiralayanKulID);
+                                    entity.Kullanici.Rol = null;
+                                    entity.Kullanici.Kiralik = null;
+                                    entity.Arac = new AracRepository().SelectedById(entity.kiralananAracID);
+                                    entity.Arac.Sirket = null;
+                                    entity.Arac.Kiralik = null;
+
                                     kiralananListesi.Add(entity);
                                 }
                             }
@@ -322,6 +330,14 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.kiraBitisKM = reader.GetInt32(4);
                                     entity.kiraAlinanUcret = reader.GetInt32(5);
                                     entity.kiralayanKulID = reader.GetInt32(6);
+
+                                    //entity.Kullanici = new KullaniciRepository().SelectedById(entity.kiralayanKulID);
+                                    //entity.Kullanici.Rol = null;
+                                    //entity.Kullanici.Kiralik = null;
+                                    //entity.Arac = new AracRepository().SelectedById(entity.kiralananAracID);
+                                    //entity.Arac.Sirket = null;
+                                    //entity.Arac.Kiralik = null;
+
                                     kiralik = entity;
                                     break;
                                 }
@@ -338,8 +354,6 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
-                //Aracin kiralama geçmişi
-                //kiralik.Kiralik = new KiralikRepository().SelectAll().Where(x => x.TransactorAccountNumber.Equals(customer.CustomerID) || x.ReceiverAccountNumber.Equals(customer.CustomerID)).ToList();
                 return kiralik;
             }
             catch (Exception ex)

@@ -15,7 +15,7 @@ namespace AnadoluRental.Models.Models
     public partial class Kiralik
     {
         public int kiraID { get; set; }
-        public Nullable<int> kiralananAracID { get; set; }
+        public int kiralananAracID { get; set; }
         public Nullable<System.DateTime> kiraTarihi { get; set; }
         public Nullable<int> verilisKM { get; set; }
         public Nullable<int> kiraBitisKM { get; set; }

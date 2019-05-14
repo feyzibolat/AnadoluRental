@@ -97,3 +97,7 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Configuration.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Configuration.xml
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.SqlServer.dll
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Portable.DataAnnotations.dll
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.SqlServer.xml
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Portable.DataAnnotations.pdb

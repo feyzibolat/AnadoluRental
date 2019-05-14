@@ -233,6 +233,14 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.sirketAdres = reader.GetString(3);
                                     entity.sirketAracSayisi = reader.GetInt32(4);
                                     entity.sirketPuani = reader.GetInt32(5);
+
+                                    entity.Arac = new AracRepository().SelectAll().Where(arac => arac.aitOlduguSirketID.Equals(entity.sirketID)).ToList();
+                                    foreach (Arac temp in entity.Arac)
+                                    {
+                                        temp.Sirket = null;
+                                        temp.Kiralik = null;
+                                    }
+
                                     sirketListesi.Add(entity);
                                 }
                             }
@@ -319,6 +327,14 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.sirketAdres = reader.GetString(3);
                                     entity.sirketAracSayisi = reader.GetInt32(4);
                                     entity.sirketPuani = reader.GetInt32(5);
+
+                                    //entity.Arac = new AracRepository().SelectAll().Where(arac => arac.aitOlduguSirketID.Equals(entity.sirketID)).ToList();
+                                    //foreach (Arac temp in entity.Arac)
+                                    //{
+                                    //    temp.Sirket = null;
+                                    //    temp.Kiralik = null;
+                                    //}
+
                                     sirket = entity;
                                     break;
                                 }
@@ -335,8 +351,6 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
-                //Şirkete ait araçların listesi
-                sirket.Arac = new AracRepository().SelectAll().Where(arac => arac.aitOlduguSirketID==sirket.sirketID).ToList();
                 return sirket;
             }
             catch (Exception ex)

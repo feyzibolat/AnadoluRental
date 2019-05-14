@@ -245,6 +245,16 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.koltukSayisi = reader.GetInt32(9);
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
+
+                                    entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
+                                    foreach (Kiralik temp in entity.Kiralik)
+                                    {
+                                        temp.Arac = null;
+                                        temp.Kullanici = null;
+                                    }
+                                    entity.Sirket = new SirketRepository().SelectedById(entity.aitOlduguSirketID);
+                                    entity.Sirket.Arac = null;
+
                                     aracListesi.Add(entity);
                                 }
                             }
@@ -337,6 +347,16 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.koltukSayisi = reader.GetInt32(9);
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
+
+                                    //entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
+                                    //foreach (Kiralik temp in entity.Kiralik)
+                                    //{
+                                    //    temp.Arac = null;
+                                    //    temp.Kullanici = null;
+                                    //}
+                                    //entity.Sirket = new SirketRepository().SelectedById(entity.aitOlduguSirketID);
+                                    //entity.Sirket.Arac = null;
+
                                     arac = entity;
                                     break;
                                 }
@@ -353,8 +373,6 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
-                //Aracin kiralama geçmişi
-                arac.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralananAracID.Equals(arac.aracID)).ToList();
                 return arac;
             }
             catch (Exception ex)

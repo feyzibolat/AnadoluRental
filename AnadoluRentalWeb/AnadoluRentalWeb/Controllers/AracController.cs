@@ -23,8 +23,6 @@ namespace AnadoluRentalWeb.Controllers
         // GET: Arac
         public async Task<ActionResult> Index()
         {
-            if (Session["kull"] == null)
-                return RedirectToAction("Index", "Home");
 
             try
             {

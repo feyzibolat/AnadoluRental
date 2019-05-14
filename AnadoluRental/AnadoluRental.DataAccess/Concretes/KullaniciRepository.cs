@@ -239,6 +239,16 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.Soyad = reader.GetString(6);
                                     entity.TelNo = reader.GetString(7);
                                     entity.Adres = reader.GetString(8);
+
+                                    entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralayanKulID.Equals(entity.kullaniciID)).ToList();
+                                    foreach (Kiralik temp in entity.Kiralik)
+                                    {
+                                        temp.Arac = null;
+                                        temp.Kullanici = null;
+                                    }
+                                    entity.Rol = new RolRepository().SelectedById(entity.kullRolID);
+                                    entity.Rol.Kullanici = null;
+
                                     kullaniciListesi.Add(entity);
                                 }
                             }
@@ -328,6 +338,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.Soyad = reader.GetString(6);
                                     entity.TelNo = reader.GetString(7);
                                     entity.Adres = reader.GetString(8);
+
                                     kull = entity;
                                     break;
                                 }
@@ -344,7 +355,6 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
-                //kull.Rol = (arac => arac.aitOlduguSirketID==sirket.sirketID).ToList();
                 return kull;
             }
             catch (Exception ex)

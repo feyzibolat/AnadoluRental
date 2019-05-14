@@ -17,13 +17,13 @@ namespace AnadoluRental.Models.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Rol()
         {
-            //this.Kullanici = new HashSet<Kullanici>();
+            this.Kullanici = new HashSet<Kullanici>();
         }
     
         public int rolID { get; set; }
         public string rolAdi { get; set; }
     
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<Kullanici> Kullanici { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Kullanici> Kullanici { get; set; }
     }
 }
