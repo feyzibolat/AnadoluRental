@@ -1,5 +1,4 @@
-﻿using AnadoluRental.Business;
-using AnadoluRental.CrossCutting.Concretes.Helper;
+﻿using AnadoluRental.CrossCutting.Concretes.Helper;
 using AnadoluRental.CrossCutting.Concretes.Logger;
 using AnadoluRental.Models.Models;
 using AnadoluRentalWeb.Models;

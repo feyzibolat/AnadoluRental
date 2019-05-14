@@ -12,8 +12,8 @@
         <th>ID</th>
         <th>Kull Adı</th>
         <th>Şifresi</th>
-        <th>RolID</th>
-        <th>Şirket IDsi</th>
+        <th>Rolü</th>
+        <th>Şirket ID</th>
         <th>Müşteri Adı</th>
         <th>Müşteri Soyadı</th>
         <th>Telefonu</th>
@@ -34,7 +34,7 @@
                 @Html.DisplayFor(modelItem => item.kullSifre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.kullRolID)
+                @Html.DisplayFor(modelItem => item.Rol.rolAdi)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.kullSirketID)

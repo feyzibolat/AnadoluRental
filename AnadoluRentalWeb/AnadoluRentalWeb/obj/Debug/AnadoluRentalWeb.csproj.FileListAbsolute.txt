@@ -239,7 +239,6 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\ros
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\roslyn\vbc.rsp
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\roslyn\VBCSCompiler.exe
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Business.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.CrossCutting.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Antlr3.Runtime.dll
@@ -258,9 +257,7 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Sys
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Web.WebPages.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Web.WebPages.Razor.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\WebGrease.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.DataAccess.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Configuration.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Business.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.CrossCutting.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.dll.config
@@ -278,11 +275,10 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Ant
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.DataAccess.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Configuration.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Configuration.xml
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.csprojAssemblyReference.cache
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.csproj.CoreCompileInputs.cache
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.csproj.CopyComplete
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.pdb
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\obj\Debug\AnadoluRentalWeb.csprojAssemblyReference.cache

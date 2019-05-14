@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>ID</th>
-        <th>Kiralanan Aracın IDsi</th>
+        <th>Kiralanan Araç</th>
         <th>Kiralama Tarihi</th>
         <th>Veriliş KMsi</th>
         <th>Kiralama Bitiş Kmsi</th>
@@ -26,10 +26,10 @@
                 @Html.DisplayFor(modelItem => item.kiraID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.kiralananAracID)
+                @Html.DisplayFor(modelItem => item.Arac.aracMarka) @Html.DisplayFor(modelItem => item.Arac.aracModel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.kiraTarihi)
+                @Html.DisplayFor(modelItem => item.kiraTarihi.Value)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.verilisKM)

@@ -1,5 +1,4 @@
-﻿using AnadoluRental.Business;
-using AnadoluRental.Models.Models;
+﻿using AnadoluRental.Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +10,7 @@ namespace AnadoluRentalWeb.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
-            using (var kullBusiness = new KullaniciBusiness())
-            {
-                //
-            }
-            
+        {            
             return View();
         }
 

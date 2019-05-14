@@ -48,10 +48,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AnadoluRental.Business, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AnadoluRental\AnadoluRental.Business\bin\Debug\AnadoluRental.Business.dll</HintPath>
-    </Reference>
     <Reference Include="AnadoluRental.CrossCutting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\AnadoluRental\AnadoluRental.CrossCutting\bin\Debug\AnadoluRental.CrossCutting.dll</HintPath>
