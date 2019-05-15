@@ -234,12 +234,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.sirketAracSayisi = reader.GetInt32(4);
                                     entity.sirketPuani = reader.GetInt32(5);
 
-                                    entity.Arac = new AracRepository().SelectAll().Where(arac => arac.aitOlduguSirketID.Equals(entity.sirketID)).ToList();
-                                    foreach (Arac temp in entity.Arac)
-                                    {
-                                        temp.Sirket = null;
-                                        temp.Kiralik = null;
-                                    }
+                                    entity.Arac = new AracRepository().SelectAllForJSON().Where(arac => arac.aitOlduguSirketID.Equals(entity.sirketID)).ToList();
 
                                     sirketListesi.Add(entity);
                                 }
@@ -266,7 +261,7 @@ namespace AnadoluRental.DataAccess.Concretes
                 throw new Exception("SirketRepository::SelectAll:Error occured.", ex);
             }
         }
-
+        
         public Sirket SelectedById(int id)
         {
             _errorCode = 0;
@@ -328,12 +323,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.sirketAracSayisi = reader.GetInt32(4);
                                     entity.sirketPuani = reader.GetInt32(5);
 
-                                    //entity.Arac = new AracRepository().SelectAll().Where(arac => arac.aitOlduguSirketID.Equals(entity.sirketID)).ToList();
-                                    //foreach (Arac temp in entity.Arac)
-                                    //{
-                                    //    temp.Sirket = null;
-                                    //    temp.Kiralik = null;
-                                    //}
+                                    
 
                                     sirket = entity;
                                     break;
@@ -351,6 +341,7 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
+                sirket.Arac = new AracRepository().SelectAllForJSON().Where(arac => arac.aitOlduguSirketID.Equals(sirket.sirketID)).ToList();
                 return sirket;
             }
             catch (Exception ex)

@@ -240,12 +240,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.TelNo = reader.GetString(7);
                                     entity.Adres = reader.GetString(8);
 
-                                    entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralayanKulID.Equals(entity.kullaniciID)).ToList();
-                                    foreach (Kiralik temp in entity.Kiralik)
-                                    {
-                                        temp.Arac = null;
-                                        temp.Kullanici = null;
-                                    }
+                                    entity.Kiralik = new KiralikRepository().SelectAllForJSON().Where(kira => kira.kiralayanKulID.Equals(entity.kullaniciID)).ToList();
                                     entity.Rol = new RolRepository().SelectedById(entity.kullRolID);
                                     entity.Rol.Kullanici = null;
 
@@ -339,6 +334,8 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.TelNo = reader.GetString(7);
                                     entity.Adres = reader.GetString(8);
 
+                                    
+
                                     kull = entity;
                                     break;
                                 }
@@ -355,6 +352,9 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
+                kull.Kiralik = new KiralikRepository().SelectAllForJSON().Where(kira => kira.kiralayanKulID.Equals(kull.kullaniciID)).ToList();
+                kull.Rol = new RolRepository().SelectedById(kull.kullRolID);
+                kull.Rol.Kullanici = null;
                 return kull;
             }
             catch (Exception ex)

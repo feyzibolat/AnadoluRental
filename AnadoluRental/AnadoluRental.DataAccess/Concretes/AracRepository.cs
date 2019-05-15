@@ -246,14 +246,100 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
 
-                                    entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
-                                    foreach (Kiralik temp in entity.Kiralik)
-                                    {
-                                        temp.Arac = null;
-                                        temp.Kullanici = null;
-                                    }
+                                    entity.Kiralik = new KiralikRepository().SelectAllForJSON().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
                                     entity.Sirket = new SirketRepository().SelectedById(entity.aitOlduguSirketID);
                                     entity.Sirket.Arac = null;
+
+                                    aracListesi.Add(entity);
+                                }
+                            }
+
+                        }
+
+                        _errorCode = int.Parse(dbCommand.Parameters["@intErrorCode"].Value.ToString());
+
+                        if (_errorCode != 0)
+                        {
+                            // Throw error.
+                            throw new Exception("Selecting All Error for entity [Arac] reported the Database ErrorCode: " + _errorCode);
+
+                        }
+                    }
+                }
+                // Return list
+                return aracListesi;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
+                throw new Exception("AracRepository::SelectAll:Error occured.", ex);
+            }
+        }
+
+        public IList<Arac> SelectAllForJSON()
+        {
+            _errorCode = 0;
+            _rowsAffected = 0;
+
+            IList<Arac> aracListesi = new List<Arac>();
+
+            try
+            {
+                var query = new StringBuilder();
+                query.Append("SELECT ");
+                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID] ");
+                query.Append("FROM [Arac] ");
+                query.Append("SELECT @intErrorCode=@@ERROR; ");
+
+                var commandText = query.ToString();
+                query.Clear();
+
+                using (var dbConnection = _dbProviderFactory.CreateConnection())
+                {
+                    if (dbConnection == null)
+                        throw new ArgumentNullException("dbConnection", "The db connection can't be null.");
+
+                    dbConnection.ConnectionString = _connectionString;
+
+                    using (var dbCommand = _dbProviderFactory.CreateCommand())
+                    {
+                        if (dbCommand == null)
+                            throw new ArgumentNullException(
+                                "dbCommand" + " The db SelectById command for entity [Arac] can't be null. ");
+
+                        dbCommand.Connection = dbConnection;
+                        dbCommand.CommandText = commandText;
+
+                        //Input Parameters - None
+
+                        //Output Parameters
+                        DBHelper.AddParameter(dbCommand, "@intErrorCode", CsType.Int,
+                            ParameterDirection.Output, null);
+
+                        //Open Connection
+                        if (dbConnection.State != ConnectionState.Open)
+                            dbConnection.Open();
+
+                        //Execute query.
+                        using (var reader = dbCommand.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    var entity = new Arac();
+                                    entity.aracID = reader.GetInt32(0);
+                                    entity.aracMarka = reader.GetString(1);
+                                    entity.aracModel = reader.GetString(2);
+                                    entity.gerekenEhliyetYasi = reader.GetInt32(3);
+                                    entity.minYasSiniri = reader.GetInt32(4);
+                                    entity.gunlukSinirKM = reader.GetInt32(5);
+                                    entity.aracKM = reader.GetInt32(6);
+                                    entity.airBagSayisi = reader.GetInt32(7);
+                                    entity.bagacHacmi = reader.GetInt32(8);
+                                    entity.koltukSayisi = reader.GetInt32(9);
+                                    entity.gunlukKiralikFiyati = reader.GetInt32(10);
+                                    entity.aitOlduguSirketID = reader.GetInt32(11);
 
                                     aracListesi.Add(entity);
                                 }
@@ -348,15 +434,6 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
 
-                                    //entity.Kiralik = new KiralikRepository().SelectAll().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
-                                    //foreach (Kiralik temp in entity.Kiralik)
-                                    //{
-                                    //    temp.Arac = null;
-                                    //    temp.Kullanici = null;
-                                    //}
-                                    //entity.Sirket = new SirketRepository().SelectedById(entity.aitOlduguSirketID);
-                                    //entity.Sirket.Arac = null;
-
                                     arac = entity;
                                     break;
                                 }
@@ -372,6 +449,10 @@ namespace AnadoluRental.DataAccess.Concretes
                         }
                     }
                 }
+
+                arac.Kiralik = new KiralikRepository().SelectAllForJSON().Where(kira => kira.kiralananAracID.Equals(id)).ToList();
+                arac.Sirket = new SirketRepository().SelectedById(arac.aitOlduguSirketID);
+                arac.Sirket.Arac = null;
 
                 return arac;
             }

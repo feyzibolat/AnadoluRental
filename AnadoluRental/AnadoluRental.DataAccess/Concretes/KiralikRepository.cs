@@ -269,6 +269,92 @@ namespace AnadoluRental.DataAccess.Concretes
             }
         }
 
+        public IList<Kiralik> SelectAllForJSON()
+        {
+            _errorCode = 0;
+            _rowsAffected = 0;
+
+            IList<Kiralik> kiralananListesi = new List<Kiralik>();
+
+            try
+            {
+                var query = new StringBuilder();
+                query.Append("SELECT ");
+                query.Append("[kiraID], [kiralananAracID], [kiraTarihi], [verilisKM], [kiraBitisKM], [kiraAlinanUcret], [kiralayanKulID] ");
+                query.Append("FROM [dbo].[Kiralik] ");
+                query.Append("SELECT @intErrorCode=@@ERROR; ");
+
+                var commandText = query.ToString();
+                query.Clear();
+
+                using (var dbConnection = _dbProviderFactory.CreateConnection())
+                {
+                    if (dbConnection == null)
+                        throw new ArgumentNullException("dbConnection", "The db connection can't be null.");
+
+                    dbConnection.ConnectionString = _connectionString;
+
+                    using (var dbCommand = _dbProviderFactory.CreateCommand())
+                    {
+                        if (dbCommand == null)
+                            throw new ArgumentNullException(
+                                "dbCommand" + " The db SelectById command for entity [Kiralik] can't be null. ");
+
+                        dbCommand.Connection = dbConnection;
+                        dbCommand.CommandText = commandText;
+
+                        //Input Parameters - None
+
+                        //Output Parameters
+                        DBHelper.AddParameter(dbCommand, "@intErrorCode", CsType.Int,
+                            ParameterDirection.Output, null);
+
+                        //Open Connection
+                        if (dbConnection.State != ConnectionState.Open)
+                            dbConnection.Open();
+
+                        //Execute query.
+                        using (var reader = dbCommand.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    var entity = new Kiralik();
+                                    entity.kiraID = reader.GetInt32(0);
+                                    entity.kiralananAracID = reader.GetInt32(1);
+                                    entity.kiraTarihi = reader.GetDateTime(2);
+                                    entity.verilisKM = reader.GetInt32(3);
+                                    entity.kiraBitisKM = reader.GetInt32(4);
+                                    entity.kiraAlinanUcret = reader.GetInt32(5);
+                                    entity.kiralayanKulID = reader.GetInt32(6);
+
+                                    kiralananListesi.Add(entity);
+                                }
+                            }
+
+                        }
+
+                        _errorCode = int.Parse(dbCommand.Parameters["@intErrorCode"].Value.ToString());
+
+                        if (_errorCode != 0)
+                        {
+                            // Throw error.
+                            throw new Exception("Selecting All Error for entity [Kiralik] reported the Database ErrorCode: " + _errorCode);
+
+                        }
+                    }
+                }
+                // Return list
+                return kiralananListesi;
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
+                throw new Exception("KiralikRepository::SelectAll:Error occured.", ex);
+            }
+        }
+
         public Kiralik SelectedById(int id)
         {
             _errorCode = 0;
@@ -331,13 +417,6 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.kiraAlinanUcret = reader.GetInt32(5);
                                     entity.kiralayanKulID = reader.GetInt32(6);
 
-                                    //entity.Kullanici = new KullaniciRepository().SelectedById(entity.kiralayanKulID);
-                                    //entity.Kullanici.Rol = null;
-                                    //entity.Kullanici.Kiralik = null;
-                                    //entity.Arac = new AracRepository().SelectedById(entity.kiralananAracID);
-                                    //entity.Arac.Sirket = null;
-                                    //entity.Arac.Kiralik = null;
-
                                     kiralik = entity;
                                     break;
                                 }
@@ -354,6 +433,12 @@ namespace AnadoluRental.DataAccess.Concretes
                     }
                 }
 
+                kiralik.Kullanici = new KullaniciRepository().SelectedById(kiralik.kiralayanKulID);
+                kiralik.Kullanici.Rol = null;
+                kiralik.Kullanici.Kiralik = null;
+                kiralik.Arac = new AracRepository().SelectedById(kiralik.kiralananAracID);
+                kiralik.Arac.Sirket = null;
+                kiralik.Arac.Kiralik = null;
                 return kiralik;
             }
             catch (Exception ex)

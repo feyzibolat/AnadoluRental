@@ -34,4 +34,3 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.DataAccess\bi
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\Portable.DataAnnotations.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.DataAccess\bin\Debug\Portable.DataAnnotations.pdb
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.DataAccess\obj\Debug\AnadoluRental.DataAccess.csprojAssemblyReference.cache
