@@ -9,44 +9,40 @@
 </p>
 <table class="table">
     <tr>
-        <th>ID</th>
+        <th>Kiralayan</th>
         <th>Kiralanan Araç</th>
         <th>Kiralama Tarihi</th>
         <th>Veriliş KMsi</th>
         <th>Kiralama Bitiş Kmsi</th>
         <th>Alınan Ücreti</th>
-        <th>Kiralayan Kull IDsi</th>
         <th>İşlemler</th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.kiraID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arac.aracMarka) @Html.DisplayFor(modelItem => item.Arac.aracModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kiraTarihi.Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.verilisKM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kiraBitisKM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kiraAlinanUcret)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kiralayanKulID)
-            </td>
-            <td>
-                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kiraID }) |
-                @Html.ActionLink("Sil", "Sil", new { id = item.kiraID })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kullanici.Ad) @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Arac.aracMarka) @Html.DisplayFor(modelItem => item.Arac.aracModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kiraTarihi.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.verilisKM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kiraBitisKM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kiraAlinanUcret)
+        </td>
+        <td>
+            @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kiraID }) |
+            @Html.ActionLink("Sil", "Sil", new { id = item.kiraID })
+        </td>
+    </tr>
     }
 </table>

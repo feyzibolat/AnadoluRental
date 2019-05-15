@@ -61,11 +61,29 @@ namespace AnadoluRentalWeb.Controllers
         }
 
         // GET: Arac/YeniOlustur
-        public ActionResult YeniOlustur()
+        public async Task<ActionResult> YeniOlustur()
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
 
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                IList<Sirket> sirketListesi = null;
+                using (var result = await client.GetAsync("api/Sirket"))
+                {
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var value = result.Content.ReadAsStringAsync().Result;
+
+                        sirketListesi = JsonConvert.DeserializeObject<ResponseContent<Sirket>>(value).Data.ToList();
+                    }
+                }
+                ViewBag.sirketListesi = sirketListesi;
+            }
             return View();
         }
 
@@ -102,7 +120,7 @@ namespace AnadoluRentalWeb.Controllers
                         bagacHacmi = int.Parse(collection["bagacHacmi"]),
                         koltukSayisi = int.Parse(collection["koltukSayisi"]),
                         gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]),
-                        aitOlduguSirketID = int.Parse(collection["aitOlduguSirketID"])
+                        aitOlduguSirketID = int.Parse(collection["secilenSirket"])
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(arac);
@@ -135,6 +153,18 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    IList<Sirket> sirketListesi = null;
+                    using (var result = await client.GetAsync("api/Sirket"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            sirketListesi = JsonConvert.DeserializeObject<ResponseContent<Sirket>>(value).Data.ToList();
+                        }
+                    }
+                    ViewBag.sirketList = sirketListesi;
+
                     Arac arac = null;
 
                     using (var result = await client.GetAsync("api/Arac/" + id))
@@ -148,6 +178,8 @@ namespace AnadoluRentalWeb.Controllers
                             return View(arac);
                         }
                     }
+
+                    
                 }
                 return RedirectToAction("Index");
             }
@@ -191,7 +223,7 @@ namespace AnadoluRentalWeb.Controllers
                         bagacHacmi = int.Parse(collection["bagacHacmi"]),
                         koltukSayisi = int.Parse(collection["koltukSayisi"]),
                         gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]),
-                        aitOlduguSirketID = int.Parse(collection["aitOlduguSirketID"])
+                        aitOlduguSirketID = int.Parse(collection["secilenSirket"])
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(arac);

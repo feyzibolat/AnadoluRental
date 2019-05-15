@@ -34,10 +34,11 @@
         <th>Bagaj Hacmi</th>
         <th>Koltuk Sayısı</th>
         <th>Günlük Kiralik Fiyatı</th>
-        <th>Ait Olduğu Şirketi IDsi</th>
+        <th>Ait Olduğu Şirketi</th>
         @if (gelenK != null && gelenK.kullRolID != 4)
         {
-            <th>İşlemler</th>}
+            <th>İşlemler</th>
+        }
     </tr>
 
     @foreach (var item in Model)
@@ -84,7 +85,8 @@
             @if (gelenK != null && gelenK.kullRolID != 4)
             {
                 <td>
-                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID }) |
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID })
+                    <br />
                     @Html.ActionLink("Sil", "Sil", new { id = item.aracID })
                 </td>
             }

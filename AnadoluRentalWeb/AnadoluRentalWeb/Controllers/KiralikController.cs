@@ -63,10 +63,29 @@ namespace AnadoluRentalWeb.Controllers
         }
 
         // GET: Kiralik/YeniOlustur
-        public ActionResult YeniOlustur()
+        public async Task<ActionResult> YeniOlustur()
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(Baseurl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                IList<Arac> aracList = null;
+                using (var result = await client.GetAsync("api/Arac"))
+                {
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var value = result.Content.ReadAsStringAsync().Result;
+
+                        aracList = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                    }
+                }
+                ViewBag.aracList = aracList;
+            }
 
             return View();
         }

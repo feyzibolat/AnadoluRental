@@ -1,7 +1,12 @@
 ﻿@model AnadoluRental.Models.Models.Arac
+@using AnadoluRental.Models.Models;
 @{
     ViewBag.Title = "Düzenle";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<Sirket> sirketList = (List<Sirket>)ViewBag.sirketList;
+
+    Arac gelenArac = Model;
 }
 
 <h2>@ViewBag.Title</h2>
@@ -86,10 +91,9 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.aitOlduguSirketID, "Ait Olduğu Şirketin IDsi", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.aitOlduguSirketID, "Ait Olduğu Şirketi", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.aitOlduguSirketID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.aitOlduguSirketID, "", new { @class = "text-danger" })
+                @Html.DropDownList("secilenSirket", new SelectList(sirketList.Select(x => new { Value = x.sirketID, Text = x.sirketAdi }), "Value", "Text", gelenArac.aitOlduguSirketID), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">
