@@ -242,8 +242,6 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\ros
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.CrossCutting.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Antlr3.Runtime.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\EntityFramework.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\EntityFramework.SqlServer.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Microsoft.AspNet.TelemetryCorrelation.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Microsoft.Web.Infrastructure.dll
@@ -261,8 +259,6 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\Con
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.CrossCutting.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\AnadoluRental.Models.dll.config
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\EntityFramework.xml
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\EntityFramework.SqlServer.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Web.Helpers.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Web.Mvc.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalWeb\AnadoluRentalWeb\bin\System.Web.Optimization.xml

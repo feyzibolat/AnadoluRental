@@ -86,7 +86,6 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\System.Web.Http.Cors.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.DataAccess.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.CrossCutting.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Configuration.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.Business.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.Models.pdb
@@ -94,10 +93,5 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\System.Web.Http.Cors.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.DataAccess.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\AnadoluRental.CrossCutting.pdb
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.xml
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Configuration.pdb
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Configuration.xml
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.SqlServer.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Portable.DataAnnotations.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\EntityFramework.SqlServer.xml
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental-WebApi\AnadoluRental-WebApi\bin\Portable.DataAnnotations.pdb

@@ -31,7 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AnadoluRental.CrossCutting">
+    <Reference Include="AnadoluRental.CrossCutting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AnadoluRental.CrossCutting\bin\Debug\AnadoluRental.CrossCutting.dll</HintPath>
     </Reference>
     <Reference Include="AnadoluRental.DataAccess, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -41,12 +42,6 @@
     <Reference Include="AnadoluRental.Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\AnadoluRental.Models\bin\Debug\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\AnadoluRental.Models\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

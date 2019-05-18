@@ -84,7 +84,18 @@ namespace AnadoluRentalWeb.Controllers
                         aracList = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
                     }
                 }
+                IList<Kullanici> kullList = null;
+                using (var result = await client.GetAsync("api/Kullanici"))
+                {
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var value = result.Content.ReadAsStringAsync().Result;
+
+                        kullList = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
+                    }
+                }
                 ViewBag.aracList = aracList;
+                ViewBag.kullList = kullList;
             }
 
             return View();
@@ -114,11 +125,11 @@ namespace AnadoluRentalWeb.Controllers
                     Kiralik kiralik = new Kiralik()
                     {
                         kiralananAracID = int.Parse(collection["kiralananAracID"]),
-                        kiraTarihi = DateTime.Parse(collection["kiraTarihi"]),
+                        //kiraTarihi = DateTime.Parse(collection["kiraTarihi"]),
                         verilisKM = int.Parse(collection["verilisKM"]),
                         kiraBitisKM = int.Parse(collection["kiraBitisKM"]),
                         kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]),
-                        kiralayanKulID = int.Parse(collection["kiralayanKulID"])
+                        kiralayanKulID = int.Parse(collection["kiralayanKullanici"])
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);
@@ -202,7 +213,7 @@ namespace AnadoluRentalWeb.Controllers
                         verilisKM = int.Parse(collection["verilisKM"]),
                         kiraBitisKM = int.Parse(collection["kiraBitisKM"]),
                         kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]),
-                        kiralayanKulID = int.Parse(collection["kiralayanKulID"])
+                        kiralayanKulID = int.Parse(collection["kiralayanKullanici"])
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);

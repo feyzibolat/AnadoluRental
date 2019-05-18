@@ -104,7 +104,7 @@ namespace AnadoluRental.Business
             }
             catch (Exception ex)
             {
-                //LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
+                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
                 throw new Exception("Business:KullaniciBusiness::SelectAllKullanici::Hata Oluştu.", ex);
             }
         }

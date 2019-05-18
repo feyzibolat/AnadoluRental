@@ -31,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Portable.DataAnnotations, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.DataAnnotations.1.0.0\lib\net45\Portable.DataAnnotations.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -53,59 +44,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Arac.cs">
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbAnadoluRental.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbAnadoluRental.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbAnadoluRental.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\dbAnadoluRental.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbAnadoluRental.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kiralik.cs">
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Kullanici.cs">
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rol.cs">
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Sirket.cs">
-      <DependentUpon>dbAnadoluRental.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Arac.cs" />
+    <Compile Include="Models\Kiralik.cs" />
+    <Compile Include="Models\Kullanici.cs" />
+    <Compile Include="Models\Rol.cs" />
+    <Compile Include="Models\Sirket.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\dbAnadoluRental.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbAnadoluRental.edmx</DependentUpon>
-      <LastGenOutput>dbAnadoluRental.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\dbAnadoluRental.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>dbAnadoluRental.edmx</DependentUpon>
-      <LastGenOutput>dbAnadoluRental.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="Models\dbAnadoluRental.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>dbAnadoluRental.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Models\dbAnadoluRental.edmx.diagram">
-      <DependentUpon>dbAnadoluRental.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

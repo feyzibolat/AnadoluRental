@@ -53,17 +53,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\AnadoluRental\AnadoluRental.Models\bin\Debug\AnadoluRental.Models.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\AnadoluRental\AnadoluRental.Models\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Portable.DataAnnotations">
-      <HintPath>..\..\AnadoluRental\AnadoluRental.Models\bin\Debug\Portable.DataAnnotations.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />

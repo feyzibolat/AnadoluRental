@@ -213,7 +213,7 @@ namespace AnadoluRentalWeb.Controllers
                         kullaniciID = id,
                         kullAdi = collection["kullAdi"],
                         kullSifre = collection["kullSifre"],
-                        kullRolID = 4,
+                        kullRolID = int.Parse(collection["kullRolID"]),
                         kullSirketID = kullSirketID,
                         Ad = collection["Ad"],
                         Soyad = collection["Soyad"],
