@@ -119,10 +119,10 @@ namespace AnadoluRental.DataAccess.Concretes
             {
                 var query = new StringBuilder();
                 query.Append("INSERT [dbo].[Arac] ");
-                query.Append("( [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID] ) ");
+                query.Append("( [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID], [aracResim] ) ");
                 query.Append("VALUES ");
                 query.Append(
-                    "( @aracMarka, @aracModel, @gerekenEhliyetYasi, @minYasSiniri, @gunlukSinirKM, @aracKM, @airBagSayisi, @bagacHacmi, @koltukSayisi, @gunlukKiralikFiyati, @aitOlduguSirketID ) ");
+                    "( @aracMarka, @aracModel, @gerekenEhliyetYasi, @minYasSiniri, @gunlukSinirKM, @aracKM, @airBagSayisi, @bagacHacmi, @koltukSayisi, @gunlukKiralikFiyati, @aitOlduguSirketID, @aracResim ) ");
                 query.Append("SELECT @intErrorCode=@@ERROR;");
 
                 var commandText = query.ToString();
@@ -155,6 +155,7 @@ namespace AnadoluRental.DataAccess.Concretes
                         DBHelper.AddParameter(dbCommand, "@koltukSayisi", CsType.Int, ParameterDirection.Input, entity.koltukSayisi);
                         DBHelper.AddParameter(dbCommand, "@gunlukKiralikFiyati", CsType.Int, ParameterDirection.Input, entity.gunlukKiralikFiyati);
                         DBHelper.AddParameter(dbCommand, "@aitOlduguSirketID", CsType.Int, ParameterDirection.Input, entity.aitOlduguSirketID);
+                        DBHelper.AddParameter(dbCommand, "@aracResim", CsType.String, ParameterDirection.Input, entity.aracResim);
 
                         //Output Params
                         DBHelper.AddParameter(dbCommand, "@intErrorCode", CsType.Int, ParameterDirection.Output, null);
@@ -192,7 +193,7 @@ namespace AnadoluRental.DataAccess.Concretes
             {
                 var query = new StringBuilder();
                 query.Append("SELECT ");
-                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID] ");
+                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID], [aracResim] ");
                 query.Append("FROM [Arac] ");
                 query.Append("SELECT @intErrorCode=@@ERROR; ");
 
@@ -245,6 +246,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.koltukSayisi = reader.GetInt32(9);
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
+                                    entity.aracResim = reader.GetString(12);
 
                                     entity.Kiralik = new KiralikRepository().SelectAllForJSON().Where(kira => kira.kiralananAracID.Equals(entity.aracID)).ToList();
                                     entity.Sirket = new SirketRepository().SelectedById(entity.aitOlduguSirketID);
@@ -287,7 +289,7 @@ namespace AnadoluRental.DataAccess.Concretes
             {
                 var query = new StringBuilder();
                 query.Append("SELECT ");
-                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID] ");
+                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID], [aracResim] ");
                 query.Append("FROM [Arac] ");
                 query.Append("SELECT @intErrorCode=@@ERROR; ");
 
@@ -340,6 +342,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.koltukSayisi = reader.GetInt32(9);
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
+                                    entity.aracResim = reader.GetString(12);
 
                                     aracListesi.Add(entity);
                                 }
@@ -378,7 +381,7 @@ namespace AnadoluRental.DataAccess.Concretes
             {
                 var query = new StringBuilder();
                 query.Append("SELECT ");
-                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID] ");
+                query.Append("[aracID], [aracMarka], [aracModel], [gerekenEhliyetYasi], [minYasSiniri], [gunlukSinirKM], [aracKM], [airBagSayisi], [bagacHacmi], [koltukSayisi], [gunlukKiralikFiyati], [aitOlduguSirketID], [aracResim] ");
                 query.Append("FROM [dbo].[Arac] ");
                 query.Append("WHERE ");
                 query.Append("[aracID] = @id ");
@@ -433,6 +436,7 @@ namespace AnadoluRental.DataAccess.Concretes
                                     entity.koltukSayisi = reader.GetInt32(9);
                                     entity.gunlukKiralikFiyati = reader.GetInt32(10);
                                     entity.aitOlduguSirketID = reader.GetInt32(11);
+                                    entity.aracResim = reader.GetString(12);
 
                                     arac = entity;
                                     break;
@@ -472,7 +476,7 @@ namespace AnadoluRental.DataAccess.Concretes
             {
                 var query = new StringBuilder();
                 query.Append(" UPDATE [dbo].[Arac] ");
-                query.Append(" SET [aracMarka] = @aracMarka, [aracModel] = @aracModel, [gerekenEhliyetYasi] =  @gerekenEhliyetYasi, [minYasSiniri] = @minYasSiniri, [gunlukSinirKM] = @gunlukSinirKM, [aracKM] = @aracKM , [airBagSayisi] = @airBagSayisi , [bagacHacmi] = @bagacHacmi , [koltukSayisi] = @koltukSayisi , [gunlukKiralikFiyati] = @gunlukKiralikFiyati , [aitOlduguSirketID] = @aitOlduguSirketID ");
+                query.Append(" SET [aracMarka] = @aracMarka, [aracModel] = @aracModel, [gerekenEhliyetYasi] =  @gerekenEhliyetYasi, [minYasSiniri] = @minYasSiniri, [gunlukSinirKM] = @gunlukSinirKM, [aracKM] = @aracKM , [airBagSayisi] = @airBagSayisi , [bagacHacmi] = @bagacHacmi , [koltukSayisi] = @koltukSayisi , [gunlukKiralikFiyati] = @gunlukKiralikFiyati , [aitOlduguSirketID] = @aitOlduguSirketID , [aracResim] = @aracResim ");
                 query.Append(" WHERE ");
                 query.Append(" [aracID] = @aracID ");
                 query.Append(" SELECT @intErrorCode = @@ERROR; ");
@@ -508,6 +512,7 @@ namespace AnadoluRental.DataAccess.Concretes
                         DBHelper.AddParameter(dbCommand, "@koltukSayisi", CsType.Int, ParameterDirection.Input, entity.koltukSayisi);
                         DBHelper.AddParameter(dbCommand, "@gunlukKiralikFiyati", CsType.Int, ParameterDirection.Input, entity.gunlukKiralikFiyati);
                         DBHelper.AddParameter(dbCommand, "@aitOlduguSirketID", CsType.Int, ParameterDirection.Input, entity.aitOlduguSirketID);
+                        DBHelper.AddParameter(dbCommand, "@aracResim", CsType.String, ParameterDirection.Input, entity.aracResim);
 
                         //Output Params
                         DBHelper.AddParameter(dbCommand, "@intErrorCode", CsType.Int, ParameterDirection.Output, null);

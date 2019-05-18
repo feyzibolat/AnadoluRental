@@ -17,79 +17,78 @@
 @if (gelenK != null && gelenK.kullRolID != 4)
 {
 <p>
-    @Html.ActionLink("Yeni Oluştur", "YeniOlustur")
+    @Html.ActionLink("Araç Ekleyin", "YeniOlustur")
 </p>
 }
 
 <table class="table">
     <tr>
-        <th>ID</th>
-        <th>Aracın Markası</th>
-        <th>Aracın Modeli</th>
-        <th>Gereken Ehliyet Yaşı</th>
-        <th>Minimum Yaş Sınırı</th>
-        <th>Günlük Sınır KMsi</th>
-        <th>Aracın KMsi</th>
-        <th>Airbag Sayısı</th>
-        <th>Bagaj Hacmi</th>
-        <th>Koltuk Sayısı</th>
-        <th>Günlük Kiralik Fiyatı</th>
+        <th>Resim</th>
+        <th>Marka</th>
+        <th>Model</th>
         <th>Ait Olduğu Şirketi</th>
+        <th>Ehliyet Yaşı</th>
+        <th>Minimum Yaş</th>
+        <th>Günlük Sınır(KM)</th>
+        <th>Araç(KM)</th>
+        <th>Airbag</th>
+        <th>Bagaj Hacmi</th>
+        <th>Koltuk</th>
+        <th>Kira Fiyatı(₺)</th>
         @if (gelenK != null && gelenK.kullRolID != 4)
         {
             <th>İşlemler</th>
         }
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (Arac item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracMarka)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.minYasSiniri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gunlukSinirKM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracKM)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.airBagSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bagacHacmi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.koltukSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
-                
-            </td>
+    <tr>
+        <td>
+            <img src="~/@item.aracResim" height="80" width="80" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aracMarka)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aracModel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.minYasSiniri)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gunlukSinirKM) KM
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aracKM) KM
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.airBagSayisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bagacHacmi) m2
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.koltukSayisi)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati) ₺
+        </td>
 
-            @if (gelenK != null && gelenK.kullRolID != 4)
-            {
-                <td>
-                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID })
-                    <br />
-                    @Html.ActionLink("Sil", "Sil", new { id = item.aracID })
-                </td>
-            }
-        </tr>
+        @if (gelenK != null && gelenK.kullRolID != 4)
+        {
+            <td>
+                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID })
+                <br />
+                @Html.ActionLink("Sil", "Sil", new { id = item.aracID })
+            </td>
+        }
+    </tr>
     }
 </table>

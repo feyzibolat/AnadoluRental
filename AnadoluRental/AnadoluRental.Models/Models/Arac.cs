@@ -21,6 +21,7 @@
         public int koltukSayisi { get; set; }
         public int gunlukKiralikFiyati { get; set; }
         public int aitOlduguSirketID { get; set; }
+        public string aracResim { get; set; }
 
         public virtual Sirket Sirket { get; set; }
         public virtual ICollection<Kiralik> Kiralik { get; set; }

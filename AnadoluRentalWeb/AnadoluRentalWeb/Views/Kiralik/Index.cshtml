@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AnadoluRental.Models.Models.Kiralik>
+@using AnadoluRental.Models.Models
 @{
     ViewBag.Title = "Kiralama Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,34 +11,38 @@
 <table class="table">
     <tr>
         <th>Kiralayan</th>
-        <th>Kiralanan Araç</th>
-        <th>Kiralama Tarihi</th>
-        <th>Veriliş KMsi</th>
-        <th>Kiralama Bitiş Kmsi</th>
+        <th>Resim</th>
+        <th>Marka Model</th>
+        <th>Kiralanan Tarih</th>
+        <th>Veriliş(KM)</th>
+        <th>Kiralama Bitiş(KM)</th>
         <th>Alınan Ücreti</th>
         <th>İşlemler</th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (Kiralik item in Model)
     {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Kullanici.Ad) @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Arac.aracMarka) @Html.DisplayFor(modelItem => item.Arac.aracModel)
+            <img src="~/@item.Arac.aracResim" height="80" width="80" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.kiraTarihi.Value)
+            @item.Arac.aracMarka @item.Arac.aracModel
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.verilisKM)
+            @item.kiraTarihi.ToString(string.Format("dd/MM/yyyy"))
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.kiraBitisKM)
+            @Html.DisplayFor(modelItem => item.verilisKM) KM
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.kiraAlinanUcret)
+            @Html.DisplayFor(modelItem => item.kiraBitisKM) KM
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kiraAlinanUcret) ₺
         </td>
         <td>
             @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kiraID }) |

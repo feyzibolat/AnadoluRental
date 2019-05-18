@@ -18,3 +18,4 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.Models\bin\De
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.csproj.CoreCompileInputs.cache
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.pdb
+C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRental\AnadoluRental.Models\obj\Debug\AnadoluRental.Models.csprojAssemblyReference.cache
