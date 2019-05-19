@@ -5,6 +5,7 @@ using AnadoluRentalWeb.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,6 +24,8 @@ namespace AnadoluRentalWeb.Controllers
         public async Task<ActionResult> Index()
         {
 
+            Kullanici gelenK = (Kullanici)Session["kull"];
+
             try
             {
                 using (var client = new HttpClient())
@@ -38,7 +41,14 @@ namespace AnadoluRentalWeb.Controllers
                         {
                             var value = result.Content.ReadAsStringAsync().Result;
 
-                            aracListesi = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                            if (gelenK != null && (gelenK.kullRolID == 2 || gelenK.kullRolID == 3) && gelenK.kullSirketID > 0) // Yönetici veya Çalışan ise..
+                            {
+                                aracListesi = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.Where(arac => (arac.aitOlduguSirketID == gelenK.kullSirketID)).ToList();
+                            }
+                            else
+                            {
+                                aracListesi = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                            }
                         }
                     }
                     return View(aracListesi);
@@ -90,7 +100,7 @@ namespace AnadoluRentalWeb.Controllers
         // POST: Arac/YeniOlustur
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> YeniOlustur(FormCollection collection)
+        public async Task<ActionResult> YeniOlustur(FormCollection collection, HttpPostedFileBase uploadFile)
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
@@ -108,22 +118,39 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    Arac arac = new Arac()
+                    Arac yeniArac = new Arac();
+                    yeniArac.aracMarka = collection["aracMarka"];
+                    yeniArac.aracModel = collection["aracModel"];
+                    yeniArac.gerekenEhliyetYasi = int.Parse(collection["gerekenEhliyetYasi"]);
+                    yeniArac.minYasSiniri = int.Parse(collection["minYasSiniri"]);
+                    yeniArac.gunlukSinirKM = int.Parse(collection["gunlukSinirKM"]);
+                    yeniArac.aracKM = int.Parse(collection["aracKM"]);
+                    yeniArac.airBagSayisi = int.Parse(collection["airBagSayisi"]);
+                    yeniArac.bagacHacmi = int.Parse(collection["bagacHacmi"]);
+                    yeniArac.koltukSayisi = int.Parse(collection["koltukSayisi"]);
+                    yeniArac.gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]);
+                    yeniArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
+                    //resim
+                    if (uploadFile == null)
                     {
-                        aracMarka = collection["aracMarka"],
-                        aracModel = collection["aracModel"],
-                        gerekenEhliyetYasi = int.Parse(collection["gerekenEhliyetYasi"]),
-                        minYasSiniri = int.Parse(collection["minYasSiniri"]),
-                        gunlukSinirKM = int.Parse(collection["gunlukSinirKM"]),
-                        aracKM = int.Parse(collection["aracKM"]),
-                        airBagSayisi = int.Parse(collection["airBagSayisi"]),
-                        bagacHacmi = int.Parse(collection["bagacHacmi"]),
-                        koltukSayisi = int.Parse(collection["koltukSayisi"]),
-                        gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]),
-                        aitOlduguSirketID = int.Parse(collection["secilenSirket"])
-                    };
+                        yeniArac.aracResim = "Content/img/arac/image_not_found.jpg";
+                    }
+                    else
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content/img/arac"), Path.GetFileName(yeniArac.aracID + "_" + uploadFile.FileName));
+                        string kayitYeri = "Content/img/arac/" + yeniArac.aracID + "_" + uploadFile.FileName;
 
-                    var serializedProduct = JsonConvert.SerializeObject(arac);
+                        string silEski = Server.MapPath("~/" + yeniArac.aracResim);
+                        if (System.IO.File.Exists(silEski))
+                        {
+                            System.IO.File.Delete(silEski);
+                        }
+
+                        yeniArac.aracResim = kayitYeri;
+                        uploadFile.SaveAs(path);
+                    }
+
+                    var serializedProduct = JsonConvert.SerializeObject(yeniArac);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync("api/Arac", content);
                     if (result.IsSuccessStatusCode)
@@ -192,7 +219,7 @@ namespace AnadoluRentalWeb.Controllers
 
         // POST: Arac/Duzenle/41
         [HttpPost]
-        public async Task<ActionResult> Duzenle(int id, FormCollection collection)
+        public async Task<ActionResult> Duzenle(int id, FormCollection collection, HttpPostedFileBase uploadFile)
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
@@ -210,34 +237,65 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    Arac arac = new Arac()
-                    {
-                        aracID = id,
-                        aracMarka = collection["aracMarka"],
-                        aracModel = collection["aracModel"],
-                        gerekenEhliyetYasi = int.Parse(collection["gerekenEhliyetYasi"]),
-                        minYasSiniri = int.Parse(collection["minYasSiniri"]),
-                        gunlukSinirKM = int.Parse(collection["gunlukSinirKM"]),
-                        aracKM = int.Parse(collection["aracKM"]),
-                        airBagSayisi = int.Parse(collection["airBagSayisi"]),
-                        bagacHacmi = int.Parse(collection["bagacHacmi"]),
-                        koltukSayisi = int.Parse(collection["koltukSayisi"]),
-                        gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]),
-                        aitOlduguSirketID = int.Parse(collection["secilenSirket"])
-                    };
+                    Arac secilenArac = null;
 
-                    var serializedProduct = JsonConvert.SerializeObject(arac);
+                    using (var gelenArac = await client.GetAsync("api/Arac/" + id))
+                    {
+                        if (gelenArac.IsSuccessStatusCode)
+                        {
+                            var value = gelenArac.Content.ReadAsStringAsync().Result;
+
+                            secilenArac = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList().First();
+                            
+                        }
+                    }
+
+                    secilenArac.aracMarka = collection["aracMarka"];
+                    secilenArac.aracModel = collection["aracModel"];
+                    secilenArac.gerekenEhliyetYasi = int.Parse(collection["gerekenEhliyetYasi"]);
+                    secilenArac.minYasSiniri = int.Parse(collection["minYasSiniri"]);
+                    secilenArac.gunlukSinirKM = int.Parse(collection["gunlukSinirKM"]);
+                    secilenArac.aracKM = int.Parse(collection["aracKM"]);
+                    secilenArac.airBagSayisi = int.Parse(collection["airBagSayisi"]);
+                    secilenArac.bagacHacmi = int.Parse(collection["bagacHacmi"]);
+                    secilenArac.koltukSayisi = int.Parse(collection["koltukSayisi"]);
+                    secilenArac.gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]);
+                    secilenArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
+                    //resim
+                    if (uploadFile==null)
+                    {
+                        secilenArac.aracResim = secilenArac.aracResim;
+                    }
+                    else
+                    {
+                        string path = Path.Combine(Server.MapPath("~/Content/img/arac"), Path.GetFileName(id + "_" + uploadFile.FileName));
+                        string kayitYeri = "Content/img/arac/" + id + "_" + uploadFile.FileName;
+
+                        string silEski = Server.MapPath("~/" + secilenArac.aracResim);
+                        if (System.IO.File.Exists(silEski))
+                        {
+                            System.IO.File.Delete(silEski);
+                        }
+
+                        secilenArac.aracResim = kayitYeri;
+                        uploadFile.SaveAs(path);
+                    }
+
+
+
+                    var serializedProduct = JsonConvert.SerializeObject(secilenArac);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PutAsync("api/Arac/" + id, content);
                     if (result.IsSuccessStatusCode)
                         return RedirectToAction("Index");
 
-                    return View();
+
+                    return RedirectToAction("Duzenle");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction("Index");
             }
         }
 

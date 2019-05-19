@@ -83,8 +83,8 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
+    <div class="container body-content centre" style="width:1440px">
+            @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - AnadoluRental</p>
@@ -94,5 +94,12 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <style>
+    div.centre {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 </body>
 </html>

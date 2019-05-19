@@ -5,30 +5,28 @@
 }
 
 <br />
-<div class="jumbotron" style="width:350px">
-
-    @using (Html.BeginForm("Kontrol", "Login", FormMethod.Post))
-    {
-        <div style="max-width: 400px;">
-            <h2 class="form-signin-heading">
-                Giriş Yap
-            </h2>
-            <label>Kullanıcı Adı</label>
-            <div>
-                @Html.TextBoxFor(k => k.kullAdi, new { @class = "form-control" })
-                @Html.ValidationMessageFor(k => k.kullAdi, "", new { @class = "error" })
-            </div>
-            <br />
-            <label>Kullanıcı Şifresi</label>
-            <div>
-                @Html.PasswordFor(k => k.kullSifre, new { @class = "form-control" })
-                @Html.ValidationMessageFor(k => k.kullSifre, "", new { @class = "error" })
-            </div>
-            <br />
-            <input type="submit" value="Giriş Yap" class="btn btn-primary" />
-            <br />
-            <br />
-        </div>
-    }
-
-</div>
+    <div class="jumbotron centre" style="width:350px">
+            @using (Html.BeginForm("Kontrol", "Login", FormMethod.Post))
+            {
+                <div style="max-width: 400px;">
+                    <h2 class="form-signin-heading">
+                        Giriş Yap
+                    </h2>
+                    <label>Kullanıcı Adı</label>
+                    <div>
+                        @Html.TextBoxFor(k => k.kullAdi, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(k => k.kullAdi, "", new { @class = "error" })
+                    </div>
+                    <br />
+                    <label>Kullanıcı Şifresi</label>
+                    <div>
+                        @Html.PasswordFor(k => k.kullSifre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(k => k.kullSifre, "", new { @class = "error" })
+                    </div>
+                    <br />
+                    <input type="submit" value="Giriş Yap" class="btn btn-primary" />
+                    <br />
+                    <br />
+                </div>
+            }
+    </div>

@@ -14,81 +14,89 @@
 }
 <h2>@ViewBag.Title</h2>
 
-@if (gelenK != null && gelenK.kullRolID != 4)
-{
-<p>
-    @Html.ActionLink("Araç Ekleyin", "YeniOlustur")
-</p>
-}
 
-<table class="table">
-    <tr>
-        <th>Resim</th>
-        <th>Marka</th>
-        <th>Model</th>
-        <th>Ait Olduğu Şirketi</th>
-        <th>Ehliyet Yaşı</th>
-        <th>Minimum Yaş</th>
-        <th>Günlük Sınır(KM)</th>
-        <th>Araç(KM)</th>
-        <th>Airbag</th>
-        <th>Bagaj Hacmi</th>
-        <th>Koltuk</th>
-        <th>Kira Fiyatı(₺)</th>
-        @if (gelenK != null && gelenK.kullRolID != 4)
+<div class="jumbotron">
+
+    <table class="table">
+        <tr>
+            <th>Resim</th>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Ait Olduğu Şirketi</th>
+            <th>Ehliyet Yaşı</th>
+            <th>Minimum Yaş</th>
+            <th>Günlük Sınır(KM)</th>
+            <th>Araç(KM)</th>
+            <th>Airbag</th>
+            <th>Bagaj Hacmi</th>
+            <th>Koltuk</th>
+            <th>Kira Fiyatı(₺)</th>
+            @if (gelenK != null && gelenK.kullRolID != 4)
+            {
+                <th>İşlemler</th>
+            }
+        </tr>
+
+        @foreach (Arac item in Model)
         {
-            <th>İşlemler</th>
-        }
-    </tr>
-
-    @foreach (Arac item in Model)
-    {
-    <tr>
-        <td>
-            <img src="~/@item.aracResim" height="80" width="80" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.aracMarka)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.aracModel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.minYasSiniri)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gunlukSinirKM) KM
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.aracKM) KM
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.airBagSayisi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.bagacHacmi) m2
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.koltukSayisi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati) ₺
-        </td>
-
-        @if (gelenK != null && gelenK.kullRolID != 4)
-        {
+        <tr>
             <td>
-                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.aracID })
-                <br />
-                @Html.ActionLink("Sil", "Sil", new { id = item.aracID })
+                <img src="~/@item.aracResim" height="80" width="80" />
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracMarka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.minYasSiniri)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gunlukSinirKM) KM
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.aracKM) KM
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.airBagSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.bagacHacmi) m2
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.koltukSayisi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati) ₺
+            </td>
+
+            @if (gelenK != null && gelenK.kullRolID != 4)
+            {
+                <td>
+                    <a href="@Url.Action("YeniOlustur", "Kiralik", new { id = item.aracID })">
+                        <button type="submit" class="btn btn-rounded btn-success">Aracı Kirala</button>
+                    </a>
+
+                    <br />
+                    <a href="@Url.Action("Duzenle", new { id = item.aracID })">
+                        <button type="submit" class="btn btn-rounded btn-info">Düzenle</button>
+                    </a>
+                    <br />
+                    <a href="@Url.Action("Sil", new { id = item.aracID })">
+                        <button type="submit" class="btn btn-rounded btn-danger">Aracı Sil</button>
+                    </a>
+                </td>
+
+            }
+            </tr>
         }
-    </tr>
-    }
-</table>
+    </table>
+
+</div>

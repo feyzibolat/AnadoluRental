@@ -25,6 +25,9 @@ namespace AnadoluRentalWeb.Controllers
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
 
+
+            Kullanici gelenK = (Kullanici)Session["kull"];
+
             try
             {
                 using (var client = new HttpClient())
@@ -40,7 +43,20 @@ namespace AnadoluRentalWeb.Controllers
                         {
                             var value = result.Content.ReadAsStringAsync().Result;
 
-                            kiralikListesi = JsonConvert.DeserializeObject<ResponseContent<Kiralik>>(value).Data.ToList();
+                            //kiralikListesi = JsonConvert.DeserializeObject<ResponseContent<Kiralik>>(value).Data.ToList();
+
+                            if (gelenK.kullRolID == 1) // Admin ise..
+                            {
+                                kiralikListesi = JsonConvert.DeserializeObject<ResponseContent<Kiralik>>(value).Data.ToList();
+                            }
+                            else if ((gelenK.kullRolID == 2 || gelenK.kullRolID == 3) && gelenK.kullSirketID > 0) // Yönetici veya Çalışan ise..
+                            {
+                                kiralikListesi = JsonConvert.DeserializeObject<ResponseContent<Kiralik>>(value).Data.Where(kira => (kira.Arac.aitOlduguSirketID == gelenK.kullSirketID)).ToList();
+                            }
+                            else
+                            {
+                                kiralikListesi = null;
+                            }
                         }
                     }
                     return View(kiralikListesi);
@@ -63,7 +79,7 @@ namespace AnadoluRentalWeb.Controllers
         }
 
         // GET: Kiralik/YeniOlustur
-        public async Task<ActionResult> YeniOlustur()
+        public async Task<ActionResult> YeniOlustur(int id)
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
@@ -94,11 +110,14 @@ namespace AnadoluRentalWeb.Controllers
                         kullList = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
                     }
                 }
+
                 ViewBag.aracList = aracList;
                 ViewBag.kullList = kullList;
-            }
+                ViewBag.kiralanacakID = id;
 
-            return View();
+
+                return View();
+            }
         }
 
         // POST: Kiralik/YeniOlustur
@@ -122,28 +141,28 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    Kiralik kiralik = new Kiralik()
-                    {
-                        kiralananAracID = int.Parse(collection["kiralananAracID"]),
-                        //kiraTarihi = DateTime.Parse(collection["kiraTarihi"]),
-                        verilisKM = int.Parse(collection["verilisKM"]),
-                        kiraBitisKM = int.Parse(collection["kiraBitisKM"]),
-                        kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]),
-                        kiralayanKulID = int.Parse(collection["kiralayanKullanici"])
-                    };
+                    Kiralik kiralik = new Kiralik();
+                    kiralik.kiralananAracID = int.Parse(collection["kiralananAracID"]);
+                    kiralik.kiraTarihi = DateTime.Parse(collection["kiraTarihi"]);
+                    kiralik.verilisKM = int.Parse(collection["verilisKM"]);
+                    kiralik.kiraBitisKM = int.Parse(collection["kiraBitisKM"]);
+                    kiralik.kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]);
+                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanKullanici"]);
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
                     var result = await client.PostAsync("api/Kiralik", content);
                     if (result.IsSuccessStatusCode)
                         return RedirectToAction("Index");
-                    return View();
+
+
+                    return RedirectToAction("YeniOlustur");
                 }
             }
             catch (Exception ex)
             {
                 LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                return View();
+                return RedirectToAction("YeniOlustur");
             }
         }
 
@@ -194,7 +213,7 @@ namespace AnadoluRentalWeb.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             try
             {
@@ -205,16 +224,14 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    Kiralik kiralik = new Kiralik()
-                    {
-                        kiraID = id,
-                        kiralananAracID = int.Parse(collection["kiralananAracID"]),
-                        kiraTarihi = DateTime.Parse(collection["kiraTarihi"]),
-                        verilisKM = int.Parse(collection["verilisKM"]),
-                        kiraBitisKM = int.Parse(collection["kiraBitisKM"]),
-                        kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]),
-                        kiralayanKulID = int.Parse(collection["kiralayanKullanici"])
-                    };
+                    Kiralik kiralik = new Kiralik();
+                    kiralik.kiraID = id;
+                    kiralik.kiralananAracID = int.Parse(collection["kiralananAracID"]);
+                    kiralik.kiraTarihi = DateTime.Parse(collection["kiraTarihi"]);
+                    kiralik.verilisKM = int.Parse(collection["verilisKM"]);
+                    kiralik.kiraBitisKM = int.Parse(collection["kiraBitisKM"]);
+                    kiralik.kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]);
+                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanKulID"]);
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
@@ -222,12 +239,12 @@ namespace AnadoluRentalWeb.Controllers
                     if (result.IsSuccessStatusCode)
                         return RedirectToAction("Index");
 
-                    return View();
+                    return RedirectToAction("Duzenle", id);
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                return RedirectToAction("Duzenle", id);
             }
         }
 
