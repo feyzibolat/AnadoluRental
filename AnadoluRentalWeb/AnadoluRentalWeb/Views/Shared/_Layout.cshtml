@@ -47,8 +47,8 @@
                         {
                             <li>@Html.ActionLink("Şirketin Araçları", "Index", "Arac")</li>
                             <li>@Html.ActionLink("Kiralanmış Araçlar", "Index", "Kiralik")</li>
-                            <li>@Html.ActionLink("Çalışanlarım", "")</li>
-                            <li>@Html.ActionLink("Müşterilerim", "Index", "Musteri")</li>
+                            <li>@Html.ActionLink("Personeller", "Index", "Musteri")</li>
+                            <li>@Html.ActionLink("Şirket Bilgisi", "Duzenle", "Sirket", new { id = gelenK.kullSirketID }, new { @class = "" })</li>
                         }
                         else if (gelenK.kullRolID == 3) //Çalışan ise..
                         {
@@ -58,13 +58,18 @@
                         }
                         else if (gelenK.kullRolID == 4) // Müşteri ise..
                         {
-                            <li>@Html.ActionLink("Araç Kirala", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Araçları Görüntüle", "Index", "Arac")</li>
+                            <li>@Html.ActionLink("Tarihçe", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Vizyonumuz", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Bize Ulaşın", "Index", "Home")</li>
                         }
 
                     }
                     else // Giriş yapılmadıysa
                     {
-                        <li>@Html.ActionLink("Araç Listesi", "Index", "Arac")</li>
+                        <li>@Html.ActionLink("Tarihçe", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Vizyonumuz", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Bize Ulaşın", "Index", "Home")</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

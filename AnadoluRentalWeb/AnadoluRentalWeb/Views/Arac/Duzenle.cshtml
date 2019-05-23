@@ -7,6 +7,17 @@
     List<Sirket> sirketList = (List<Sirket>)ViewBag.sirketList;
 
     Arac gelenArac = Model;
+
+    Sirket kullSirketi = null;
+    Kullanici gelenK = null;
+    if (Session["kull"] != null)
+    {
+        gelenK = (Kullanici)Session["kull"];
+        if (gelenK.kullRolID != 1)
+        {
+            kullSirketi = sirketList.Where(sirket => sirket.sirketID == gelenK.kullSirketID).First();
+        }
+    }
 }
 
 <h2>@ViewBag.Title</h2>
@@ -106,7 +117,16 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.aitOlduguSirketID, "Ait Olduğu Şirketi", htmlAttributes: new { @class = "control-label" })
                 <div class="col-md-10">
-                    @Html.DropDownList("secilenSirket", new SelectList(sirketList.Select(x => new { Value = x.sirketID, Text = x.sirketAdi }), "Value", "Text", gelenArac.aitOlduguSirketID), new { @class = "form-control" })
+
+                    @if (gelenK != null && gelenK.kullRolID != 1)
+                    {
+                        <label class="form-control" style="width:320px">@kullSirketi.sirketAdi</label>
+                        @Html.HiddenFor(secilenSirket => gelenK.kullSirketID)
+                    }
+                    else
+                    {
+                        @Html.DropDownList("secilenSirket", new SelectList(sirketList.Select(x => new { Value = x.sirketID, Text = x.sirketAdi }), "Value", "Text", gelenArac.aitOlduguSirketID), new { @class = "form-control" })
+                    }
                 </div>
             </div>
             <div class="form-group">

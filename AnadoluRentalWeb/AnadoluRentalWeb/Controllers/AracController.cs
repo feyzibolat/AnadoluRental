@@ -107,7 +107,7 @@ namespace AnadoluRentalWeb.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("YeniOlustur");
             }
             try
             {
@@ -129,7 +129,10 @@ namespace AnadoluRentalWeb.Controllers
                     yeniArac.bagacHacmi = int.Parse(collection["bagacHacmi"]);
                     yeniArac.koltukSayisi = int.Parse(collection["koltukSayisi"]);
                     yeniArac.gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]);
-                    yeniArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
+                    if(collection["secilenSirket"]==null)
+                        yeniArac.aitOlduguSirketID = int.Parse(collection["gelenK.kullSirketID"]);
+                    else
+                        yeniArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
                     //resim
                     if (uploadFile == null)
                     {
@@ -155,13 +158,13 @@ namespace AnadoluRentalWeb.Controllers
                     var result = await client.PostAsync("api/Arac", content);
                     if (result.IsSuccessStatusCode)
                         return RedirectToAction("Index");
-                    return View();
+                    return RedirectToAction("YeniOlustur");
                 }
             }
             catch (Exception ex)
             {
                 LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
-                return View();
+                return RedirectToAction("YeniOlustur");
             }
         }
 
@@ -226,7 +229,7 @@ namespace AnadoluRentalWeb.Controllers
 
             if (!ModelState.IsValid)
             {
-                return View();
+                return RedirectToAction("Index");
             }
             try
             {
@@ -260,7 +263,10 @@ namespace AnadoluRentalWeb.Controllers
                     secilenArac.bagacHacmi = int.Parse(collection["bagacHacmi"]);
                     secilenArac.koltukSayisi = int.Parse(collection["koltukSayisi"]);
                     secilenArac.gunlukKiralikFiyati = int.Parse(collection["gunlukKiralikFiyati"]);
-                    secilenArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
+                    if (collection["secilenSirket"] == null)
+                        secilenArac.aitOlduguSirketID = int.Parse(collection["gelenK.kullSirketID"]);
+                    else
+                        secilenArac.aitOlduguSirketID = int.Parse(collection["secilenSirket"]);
                     //resim
                     if (uploadFile==null)
                     {
@@ -272,7 +278,7 @@ namespace AnadoluRentalWeb.Controllers
                         string kayitYeri = "Content/img/arac/" + id + "_" + uploadFile.FileName;
 
                         string silEski = Server.MapPath("~/" + secilenArac.aracResim);
-                        if (System.IO.File.Exists(silEski))
+                        if (System.IO.File.Exists(silEski) && secilenArac.aracResim != "Content/img/arac/image_not_found.jpg")
                         {
                             System.IO.File.Delete(silEski);
                         }
@@ -290,7 +296,7 @@ namespace AnadoluRentalWeb.Controllers
                         return RedirectToAction("Index");
 
 
-                    return RedirectToAction("Duzenle");
+                    return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)

@@ -36,6 +36,31 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    IList<Arac> sirketinAracListesi = null;
+                    using (var result = await client.GetAsync("api/Arac"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+
+                            sirketinAracListesi = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.Where(arac => (arac.aitOlduguSirketID == gelenK.kullSirketID)).ToList();
+                        }
+                    }
+
+                    IList<Kiralik> sirketinKiralikListesi = null;
+                    using (var result = await client.GetAsync("api/Kiralik"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            sirketinKiralikListesi = JsonConvert.DeserializeObject<ResponseContent<Kiralik>>(value).Data.Where(kira => kira.Arac.aitOlduguSirketID == gelenK.kullSirketID).ToList();
+                            
+                        }
+                    }
+
+
                     IList<Kullanici> kullaniciListesi = null;
                     using (var result = await client.GetAsync("api/Kullanici"))
                     {
@@ -46,12 +71,31 @@ namespace AnadoluRentalWeb.Controllers
                             //kullaniciListesi = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
 
                             if (gelenK.kullRolID == 1) // Admin ise..
-                            {
+                            {//Tümünü getir
                                 kullaniciListesi = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
                             }
-                            else if ((gelenK.kullRolID == 2 || gelenK.kullRolID == 3) && gelenK.kullSirketID > 0) // Yönetici veya Çalışan ise..
-                            {
-                                kullaniciListesi = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.Where(kull => (kull.kullSirketID == gelenK.kullSirketID && kull.kullRolID == 4)).ToList();
+                            else if ((gelenK.kullRolID == 2) && gelenK.kullSirketID > 0) // Yönetici ise..
+                            {//hem çalışanlar hemde müşterileri getir
+                                kullaniciListesi = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.Where(kull => kull.kullSirketID == gelenK.kullSirketID && (kull.kullRolID == 2 || kull.kullRolID == 3)).ToList();
+                            }
+                            else if ((gelenK.kullRolID == 3) && gelenK.kullSirketID > 0) // Çalışan ise..
+                            {//sadece müşterileri getir
+                                IList<Kullanici> musteriListesi = null;
+                                musteriListesi = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.Where(kull => kull.kullRolID == 4 && kull.kullSirketID == 0).ToList();
+                                
+                                IList<Kullanici> sirketinMusterileri = new List<Kullanici>();
+                                foreach (Kullanici mus in musteriListesi)
+                                {
+                                    foreach (Kiralik kira in sirketinKiralikListesi)
+                                    {
+                                        if (kira.kiralayanKulID==mus.kullaniciID) //foreach yap (Arac arac in sirketinAracListesi)  -- if(arac.aracID==kira.Arac.aracID)
+                                        {
+                                            sirketinMusterileri.Add(mus);
+                                            break;
+                                        }
+                                    }
+                                }
+                                return View(sirketinMusterileri);
                             }
                             else
                             {

@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "Kiralanan Araçlar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Kullanici gelenK = (Kullanici)Session["kull"];
+    List<Kiralik> kiralikListesi = (List<Kiralik>)Model;
+    if (gelenK.kullRolID != 1)
+    { kiralikListesi = kiralikListesi.Where(kira => kira.Arac.aitOlduguSirketID == gelenK.kullSirketID).ToList(); }
 }
 <h2>@ViewBag.Title</h2>
 
@@ -12,6 +17,7 @@
             <th>Kiralayan</th>
             <th>Resim</th>
             <th>Marka Model</th>
+            <th>Şirket ID</th>
             <th>Kiralanan Tarih</th>
             <th>Veriliş(KM)</th>
             <th>Kiralama Bitiş(KM)</th>
@@ -19,40 +25,46 @@
             <th>İşlemler</th>
         </tr>
 
-        @foreach (Kiralik item in Model)
+        @if (kiralikListesi!=null)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Kullanici.Ad) @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
-                </td>
-                <td>
-                    <img src="~/@item.Arac.aracResim" height="80" width="80" />
-                </td>
-                <td>
-                    @item.Arac.aracMarka @item.Arac.aracModel
-                </td>
-                <td>
-                    @item.kiraTarihi.ToString(string.Format("dd/MM/yyyy"))
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.verilisKM) KM
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.kiraBitisKM) KM
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.kiraAlinanUcret) ₺
-                </td>
-                <td>
-                    <a href="@Url.Action("Duzenle", new { id = item.kiraID })">
-                        <button type="submit" class="btn btn-rounded btn-info">Güncelle</button>
-                    </a>
-                    <br />
-                    <a href="@Url.Action("Sil", new { id = item.kiraID })">
-                        <button type="submit" class="btn btn-rounded btn-danger">Kirayi Kaldır</button>
-                    </a>
-                </td>
-            </tr>
+            foreach (Kiralik item in kiralikListesi)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kullanici.Ad) @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
+                    </td>
+                    <td>
+                        <img src="~/@item.Arac.aracResim" height="80" width="80" />
+                    </td>
+                    <td>
+                        @item.Arac.aracMarka @item.Arac.aracModel
+                    </td>
+                    <td>
+                        @item.Arac.aitOlduguSirketID
+                    </td>
+                    <td>
+                        @item.kiraTarihi.ToString(string.Format("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.verilisKM) KM
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.kiraBitisKM) KM
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.kiraAlinanUcret) ₺
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Duzenle", new { id = item.kiraID })">
+                            <button type="submit" class="btn btn-rounded btn-info">Güncelle</button>
+                        </a>
+                        <br />
+                        <a href="@Url.Action("Sil", new { id = item.kiraID })">
+                            <button type="submit" class="btn btn-rounded btn-danger">Kirayi Kaldır</button>
+                        </a>
+                    </td>
+                </tr>
+            }
         }
     </table>
 </div>

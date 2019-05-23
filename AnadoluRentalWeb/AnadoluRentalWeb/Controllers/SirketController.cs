@@ -24,7 +24,14 @@ namespace AnadoluRentalWeb.Controllers
         public async Task<ActionResult> Index()
         {
             if (Session["kull"] == null)
+            {
                 return RedirectToAction("Index", "Home");
+            }
+
+            if (((Kullanici)Session["kull"]).kullRolID != 1)
+            {
+                return RedirectToAction("Index", "Arac");
+            }
 
             try
             {
@@ -123,6 +130,9 @@ namespace AnadoluRentalWeb.Controllers
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
 
+
+            Kullanici gelenK = (Kullanici)Session["kull"];
+
             try
             {
                 using (var client = new HttpClient())
@@ -133,6 +143,20 @@ namespace AnadoluRentalWeb.Controllers
                         new MediaTypeWithQualityHeaderValue("application/json"));
 
                     Sirket sirket = null;
+
+                    IList<Arac> aracListesi = null;
+                    using (var result = await client.GetAsync("api/Arac"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+
+                            aracListesi = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
+                        }
+                    }
+
+                    ViewBag.aracList = aracListesi;
 
                     using (var result = await client.GetAsync("api/Sirket/" + id))
                     {

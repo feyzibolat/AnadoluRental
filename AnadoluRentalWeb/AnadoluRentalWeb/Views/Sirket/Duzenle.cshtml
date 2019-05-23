@@ -1,7 +1,13 @@
 ﻿@model AnadoluRental.Models.Models.Sirket
+@using AnadoluRental.Models.Models;
 @{
     ViewBag.Title = "Düzenle";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    Kullanici gelenK = (Kullanici)Session["kull"];
+    List<Arac> aracList = (List<Arac>)ViewBag.aracList;
+    int sirketAracSayisi = aracList.Where(arac => arac.aitOlduguSirketID == gelenK.kullSirketID).Count();
 }
 
 <h2>@ViewBag.Title</h2>
@@ -10,52 +16,56 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.sirketID)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.sirketID)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.sirketAdi, "Şirket Adı", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sirketAdi, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sirketAdi, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.sirketAdi, "Şirket Adı", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sirketAdi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sirketAdi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.sirketSehir, "Şehir", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sirketSehir, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sirketSehir, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.sirketAdres, "Adresi", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sirketAdres, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sirketAdres, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.sirketAracSayisi, "Araç Sayısı", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                
+                <label class="form-control" style="width:280px">@sirketAracSayisi</label>
+
+
+                @Html.HiddenFor(model => model.sirketAracSayisi, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sirketAracSayisi, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.sirketPuani, "Şirket Puanı", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.sirketPuani, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.sirketPuani, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Düzenle" class="btn btn-default" />
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.sirketSehir, "Şehir", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sirketSehir, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sirketSehir, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.sirketAdres, "Adresi", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sirketAdres, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sirketAdres, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.sirketAracSayisi, "Araç Sayısı", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sirketAracSayisi, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sirketAracSayisi, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.sirketPuani, "Şirket Puanı", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.sirketPuani, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.sirketPuani, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Düzenle" class="btn btn-default" />
-        </div>
-    </div>
-</div>
 }
 <div>
     @Html.ActionLink("Şirket Listesine Geri Dön", "Index")

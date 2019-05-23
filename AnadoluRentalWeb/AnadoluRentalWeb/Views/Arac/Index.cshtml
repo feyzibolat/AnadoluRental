@@ -4,7 +4,7 @@
     ViewBag.Title = "Araç Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    
+
     Kullanici gelenK = null;
     if (Session["kull"] != null)
     {
@@ -16,6 +16,16 @@
 
 
 <div class="jumbotron">
+
+    @if (gelenK != null && gelenK.kullRolID != 4)
+    {
+        <a href="@Url.Action("YeniOlustur")">
+            <button type="submit" class="btn btn-rounded btn-primary">Araç Ekle</button>
+        </a>
+        <br />
+        <br />
+    }
+
 
     <table class="table">
         <tr>
@@ -39,62 +49,62 @@
 
         @foreach (Arac item in Model)
         {
-        <tr>
-            <td>
-                <img src="~/@item.aracResim" height="80" width="80" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracMarka)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracModel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.minYasSiniri)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gunlukSinirKM) KM
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.aracKM) KM
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.airBagSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.bagacHacmi) m2
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.koltukSayisi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati) ₺
-            </td>
-
-            @if (gelenK != null && gelenK.kullRolID != 4)
-            {
+            <tr>
                 <td>
-                    <a href="@Url.Action("YeniOlustur", "Kiralik", new { id = item.aracID })">
-                        <button type="submit" class="btn btn-rounded btn-success">Aracı Kirala</button>
-                    </a>
-
-                    <br />
-                    <a href="@Url.Action("Duzenle", new { id = item.aracID })">
-                        <button type="submit" class="btn btn-rounded btn-info">Düzenle</button>
-                    </a>
-                    <br />
-                    <a href="@Url.Action("Sil", new { id = item.aracID })">
-                        <button type="submit" class="btn btn-rounded btn-danger">Aracı Sil</button>
-                    </a>
+                    <img src="~/@item.aracResim" height="80" width="80" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aracMarka)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aracModel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sirket.sirketAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gerekenEhliyetYasi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.minYasSiniri)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gunlukSinirKM) KM
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.aracKM) KM
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.airBagSayisi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bagacHacmi) m2
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.koltukSayisi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gunlukKiralikFiyati) ₺
                 </td>
 
-            }
+                @if (gelenK != null && gelenK.kullRolID != 4)
+                {
+                    <td>
+                        <a href="@Url.Action("YeniOlustur", "Kiralik", new { id = item.aracID })">
+                            <button type="submit" class="btn btn-rounded btn-success">Aracı Kirala</button>
+                        </a>
+
+                        <br />
+                        <a href="@Url.Action("Duzenle", new { id = item.aracID })">
+                            <button type="submit" class="btn btn-rounded btn-info">Düzenle</button>
+                        </a>
+                        <br />
+                        <a href="@Url.Action("Sil", new { id = item.aracID })">
+                            <button type="submit" class="btn btn-rounded btn-danger">Aracı Sil</button>
+                        </a>
+                    </td>
+
+                }
             </tr>
         }
     </table>

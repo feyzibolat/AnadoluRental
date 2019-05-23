@@ -147,7 +147,7 @@ namespace AnadoluRentalWeb.Controllers
                     kiralik.verilisKM = int.Parse(collection["verilisKM"]);
                     kiralik.kiraBitisKM = int.Parse(collection["kiraBitisKM"]);
                     kiralik.kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]);
-                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanKullanici"]);
+                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanMusteri"]);
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
@@ -180,6 +180,19 @@ namespace AnadoluRentalWeb.Controllers
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(
                         new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    IList<Kullanici> kullList = null;
+                    using (var result = await client.GetAsync("api/Kullanici"))
+                    {
+                        if (result.IsSuccessStatusCode)
+                        {
+                            var value = result.Content.ReadAsStringAsync().Result;
+
+                            kullList = JsonConvert.DeserializeObject<ResponseContent<Kullanici>>(value).Data.ToList();
+                        }
+                    }
+
+                    ViewBag.kullList = kullList;
 
                     Kiralik kiralik = null;
 
@@ -231,7 +244,7 @@ namespace AnadoluRentalWeb.Controllers
                     kiralik.verilisKM = int.Parse(collection["verilisKM"]);
                     kiralik.kiraBitisKM = int.Parse(collection["kiraBitisKM"]);
                     kiralik.kiraAlinanUcret = int.Parse(collection["kiraAlinanUcret"]);
-                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanKulID"]);
+                    kiralik.kiralayanKulID = int.Parse(collection["kiralayanMusteri"]);
 
                     var serializedProduct = JsonConvert.SerializeObject(kiralik);
                     var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");

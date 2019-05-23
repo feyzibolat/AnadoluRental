@@ -4,11 +4,18 @@
     ViewBag.Title = "Yeni Oluştur";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+
+    Kullanici gelenK = (Kullanici)Session["kull"];
     List<Arac> aracList = (List<Arac>)ViewBag.aracList;
+    aracList = aracList.Where(arac => arac.aitOlduguSirketID==gelenK.kullSirketID).ToList();
     List<Kullanici> kullList = (List<Kullanici>)ViewBag.kullList;
+    kullList = kullList.Where(kull => kull.kullRolID == 4).ToList();
     int kiralananAracID = (int)ViewBag.kiralanacakID;
     Arac secilenArac = aracList.Where(arac => arac.aracID == kiralananAracID).First();
     string secilenAracMarkaModel = secilenArac.aracMarka + " " + secilenArac.aracModel;
+
+
+
 }
 
 <h2>@ViewBag.Title</h2>
@@ -56,9 +63,9 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.kiralayanKulID, "Kiralayan Kullanıcı", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.kiralayanKulID, "Kiralayan Müşteri", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("kiralayanKullanici", new SelectList(kullList.Select(x => new { Value = x.kullaniciID, Text = x.Ad + " " + x.Soyad }), "Value", "Text", ((Kullanici)Session["kull"]).kullaniciID), new { @class = "form-control" })
+                @Html.DropDownList("kiralayanMusteri", new SelectList(kullList.Select(x => new { Value = x.kullaniciID, Text = x.Ad + " " + x.Soyad }), "Value", "Text"), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">

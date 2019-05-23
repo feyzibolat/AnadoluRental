@@ -6,6 +6,11 @@
 
 
     Kiralik gelenKiralik = Model;
+
+
+    Kullanici gelenK = (Kullanici)Session["kull"];
+    List<Kullanici> kullList = (List<Kullanici>)ViewBag.kullList;
+    kullList = kullList.Where(kull => kull.kullRolID == 4).ToList();
 }
 
 <h2>@ViewBag.Title</h2>
@@ -58,12 +63,9 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.kiralayanKulID, "Kiralayan Kullanıcının IDsi", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.kiralayanKulID, "Kiralayan Müşteri", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <label class="form-control" style="width:320px">@gelenKiralik.Kullanici.Ad @gelenKiralik.Kullanici.Soyad</label>
-
-                @Html.HiddenFor(model => model.kiralayanKulID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kiralayanKulID, "", new { @class = "text-danger" })
+                @Html.DropDownList("kiralayanMusteri", new SelectList(kullList.Select(x => new { Value = x.kullaniciID, Text = x.Ad + " " + x.Soyad }), "Value", "Text", gelenKiralik.Kullanici.kullaniciID), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">

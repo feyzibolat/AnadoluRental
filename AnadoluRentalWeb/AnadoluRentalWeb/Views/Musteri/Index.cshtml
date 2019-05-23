@@ -1,44 +1,82 @@
 ﻿@model IEnumerable<AnadoluRental.Models.Models.Kullanici>
+@using AnadoluRental.Models.Models;
 @{
     ViewBag.Title = "Müşteri Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Kullanici gelenK = null;
+    if (Session["kull"] != null)
+    {
+        gelenK = (Kullanici)Session["kull"];
+        if (gelenK.kullRolID == 1)
+        {
+            ViewBag.Title = "Kullanıcı Listesi";
+        } else if (gelenK.kullRolID==2)
+        {
+            ViewBag.Title = "Personel Listesi";
+        }
+    }
 }
 <h2>@ViewBag.Title</h2>
-<p>
-    @Html.ActionLink("Yeni Oluştur", "YeniOlustur")
-</p>
-<table class="table">
-    <tr>
-        <th>ID</th>
-        <th>Kull Adı</th>
-        <th>Şifresi</th>
-        <th>Rolü</th>
-        <th>Şirket ID</th>
-        <th>Müşteri Adı</th>
-        <th>Müşteri Soyadı</th>
-        <th>Telefonu</th>
-        <th>Adresi</th>
-        <th>İşlemler</th>
-    </tr>
 
-    @foreach (var item in Model)
+<div class="jumbotron">
+
+    @if (gelenK != null && gelenK.kullRolID ==1)
     {
+        <a href="@Url.Action("YeniOlustur")">
+            <button type="submit" class="btn btn-rounded btn-primary">Kullanıcı Ekle</button>
+        </a>    
+        <br />
+        <br />
+    }
+
+    <table class="table">
         <tr>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {<th>ID</th>}
+            <th>Kull Adı</th>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {<th>Şifresi</th>}
+            <th>Rolü</th>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {<th>Şirket ID</th>}
+            <th>Adı</th>
+            <th>Soyadı</th>
+            <th>Telefonu</th>
+            <th>Adresi</th>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {
+                <th>İşlemler</th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {
             <td>
                 @Html.DisplayFor(modelItem => item.kullaniciID)
             </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.kullAdi)
             </td>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {
             <td>
                 @Html.DisplayFor(modelItem => item.kullSifre)
             </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Rol.rolAdi)
             </td>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {
             <td>
                 @Html.DisplayFor(modelItem => item.kullSirketID)
             </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Ad)
             </td>
@@ -51,10 +89,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Adres)
             </td>
-            <td>
-                @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kullaniciID }) |
-                @Html.ActionLink("Sil", "Sil", new { id = item.kullaniciID })
-            </td>
+            @if (gelenK != null && gelenK.kullRolID == 1)
+            {
+                <td>
+                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kullaniciID }) |
+                    @Html.ActionLink("Sil", "Sil", new { id = item.kullaniciID })
+                </td>
+            }
         </tr>
-    }
-</table>
+        }
+    </table>
+
+</div>
