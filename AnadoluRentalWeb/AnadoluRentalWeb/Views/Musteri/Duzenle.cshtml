@@ -1,7 +1,17 @@
 ﻿@model AnadoluRental.Models.Models.Kullanici
+@using AnadoluRental.Models.Models;
 @{
     ViewBag.Title = "Düzenle";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    Kullanici secilenKull = Model;
+    Kullanici gelenK = (Kullanici)Session["kull"];
+    List<Rol> roller = new List<Rol>();
+    roller.Add(new Rol() { rolID = 1, rolAdi = "Admin" });
+    roller.Add(new Rol() { rolID = 2, rolAdi = "Yönetici" });
+    roller.Add(new Rol() { rolID = 3, rolAdi = "Çalışan" });
+    roller.Add(new Rol() { rolID = 4, rolAdi = "Müşteri" });
 }
 
 <h2>@ViewBag.Title</h2>
@@ -30,10 +40,9 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.kullRolID, "Kull Rol IDsi", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.kullRolID, "Kull Rol", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.kullRolID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.kullRolID, "", new { @class = "text-danger" })
+                @Html.DropDownList("secilenRol", new SelectList(roller.Select(x => new { Value = x.rolID, Text = x.rolAdi }), "Value", "Text", secilenKull.kullRolID), new { @class = "form-control" })
             </div>
         </div>
         <div class="form-group">

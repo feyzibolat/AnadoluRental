@@ -91,10 +91,15 @@
             </td>
             @if (gelenK != null && gelenK.kullRolID == 1)
             {
-                <td>
-                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.kullaniciID }) |
-                    @Html.ActionLink("Sil", "Sil", new { id = item.kullaniciID })
-                </td>
+            <td>
+                <a href="@Url.Action("Duzenle", new { id = item.kullaniciID })">
+                    <button type="submit" class="btn btn-rounded btn-info">Düzenle</button>
+                </a>
+                <br />
+                <a href="@Url.Action("Sil", new { id = item.kullaniciID })">
+                    <button type="submit" class="btn btn-rounded btn-danger">Sil</button>
+                </a>
+            </td>
             }
         </tr>
         }

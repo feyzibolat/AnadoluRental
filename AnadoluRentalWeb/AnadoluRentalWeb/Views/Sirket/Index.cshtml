@@ -46,8 +46,13 @@
                     @Html.DisplayFor(modelItem => item.sirketPuani)
                 </td>
                 <td>
-                    @Html.ActionLink("Düzenle", "Duzenle", new { id = item.sirketID }) |
-                    @Html.ActionLink("Sil", "Sil", new { id = item.sirketID })
+                    <a href="@Url.Action("Duzenle", new { id = item.sirketID })">
+                        <button type="submit" class="btn btn-rounded btn-info">Düzenle</button>
+                    </a>
+                    <br />
+                    <a href="@Url.Action("Sil", new { id = item.sirketID })">
+                        <button type="submit" class="btn btn-rounded btn-danger">Sil</button>
+                    </a>
                 </td>
             </tr>
         }

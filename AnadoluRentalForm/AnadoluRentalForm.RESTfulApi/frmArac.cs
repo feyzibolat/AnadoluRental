@@ -63,7 +63,8 @@ namespace AnadoluRentalForm
                         bagacHacmi = int.Parse(txtBagajHacmi.Text),
                         koltukSayisi = int.Parse(txtKoltukSayisi.Text),
                         gunlukKiralikFiyati = int.Parse(txtGunlukKiralikFiyati.Text),
-                        aitOlduguSirketID = int.Parse(txtAitOlduguSirketID.Text)
+                        aitOlduguSirketID = int.Parse(txtAitOlduguSirketID.Text),
+                        aracResim = "Content/img/arac/image_not_found.jpg"
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(arac);
@@ -116,7 +117,8 @@ namespace AnadoluRentalForm
                         bagacHacmi = int.Parse(txtBagajHacmi.Text),
                         koltukSayisi = int.Parse(txtKoltukSayisi.Text),
                         gunlukKiralikFiyati = int.Parse(txtGunlukKiralikFiyati.Text),
-                        aitOlduguSirketID = int.Parse(txtAitOlduguSirketID.Text)
+                        aitOlduguSirketID = int.Parse(txtAitOlduguSirketID.Text),
+                        aracResim = dgAracListesi.CurrentRow.Cells[12].Value.ToString()
                     };
 
                     var serializedProduct = JsonConvert.SerializeObject(arac);
@@ -203,8 +205,8 @@ namespace AnadoluRentalForm
 
                             dgAracListesi.DataSource = JsonConvert.DeserializeObject<ResponseContent<Arac>>(value).Data.ToList();
                             dgAracListesi.Columns[0].Width = 50;
-                            dgAracListesi.Columns[12].Visible = false;
                             dgAracListesi.Columns[13].Visible = false;
+                            dgAracListesi.Columns[14].Visible = false;
                         }
                     }
                 }

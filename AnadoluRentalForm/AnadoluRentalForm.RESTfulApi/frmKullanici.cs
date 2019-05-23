@@ -196,6 +196,7 @@ namespace AnadoluRentalForm
                             dgKullanici.Columns[0].HeaderText = "ID";
                             dgKullanici.Columns[0].Width = 40;
                             dgKullanici.Columns[9].Visible = false;
+                            dgKullanici.Columns[10].Visible = false;
                         }
                     }
                 }

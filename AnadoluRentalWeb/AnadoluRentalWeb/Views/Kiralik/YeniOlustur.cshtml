@@ -7,7 +7,10 @@
 
     Kullanici gelenK = (Kullanici)Session["kull"];
     List<Arac> aracList = (List<Arac>)ViewBag.aracList;
-    aracList = aracList.Where(arac => arac.aitOlduguSirketID==gelenK.kullSirketID).ToList();
+    if(gelenK.kullRolID!=1)
+    {
+        aracList = aracList.Where(arac => arac.aitOlduguSirketID == gelenK.kullSirketID).ToList();
+    }
     List<Kullanici> kullList = (List<Kullanici>)ViewBag.kullList;
     kullList = kullList.Where(kull => kull.kullRolID == 4).ToList();
     int kiralananAracID = (int)ViewBag.kiralanacakID;

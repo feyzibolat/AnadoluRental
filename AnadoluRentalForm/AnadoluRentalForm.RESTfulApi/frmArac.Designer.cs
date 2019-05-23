@@ -63,7 +63,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(116, 132);
+            this.label6.Location = new System.Drawing.Point(90, 140);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 60;
@@ -71,7 +71,7 @@
             // 
             // txtMinYasSiniri
             // 
-            this.txtMinYasSiniri.Location = new System.Drawing.Point(225, 129);
+            this.txtMinYasSiniri.Location = new System.Drawing.Point(199, 137);
             this.txtMinYasSiniri.MaxLength = 20;
             this.txtMinYasSiniri.Name = "txtMinYasSiniri";
             this.txtMinYasSiniri.Size = new System.Drawing.Size(133, 20);
@@ -119,7 +119,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(116, 158);
+            this.label5.Location = new System.Drawing.Point(90, 166);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(85, 13);
             this.label5.TabIndex = 59;
@@ -128,7 +128,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(116, 106);
+            this.label4.Location = new System.Drawing.Point(90, 114);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 13);
             this.label4.TabIndex = 58;
@@ -137,7 +137,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 77);
+            this.label3.Location = new System.Drawing.Point(90, 85);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 13);
             this.label3.TabIndex = 57;
@@ -146,7 +146,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(116, 48);
+            this.label2.Location = new System.Drawing.Point(90, 56);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 56;
@@ -155,7 +155,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(116, 19);
+            this.label1.Location = new System.Drawing.Point(90, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 55;
@@ -163,7 +163,7 @@
             // 
             // txtGunlukSinir
             // 
-            this.txtGunlukSinir.Location = new System.Drawing.Point(225, 155);
+            this.txtGunlukSinir.Location = new System.Drawing.Point(199, 163);
             this.txtGunlukSinir.MaxLength = 150;
             this.txtGunlukSinir.Name = "txtGunlukSinir";
             this.txtGunlukSinir.Size = new System.Drawing.Size(133, 20);
@@ -171,7 +171,7 @@
             // 
             // txtGerekenEhliyetYasi
             // 
-            this.txtGerekenEhliyetYasi.Location = new System.Drawing.Point(225, 103);
+            this.txtGerekenEhliyetYasi.Location = new System.Drawing.Point(199, 111);
             this.txtGerekenEhliyetYasi.MaxLength = 20;
             this.txtGerekenEhliyetYasi.Name = "txtGerekenEhliyetYasi";
             this.txtGerekenEhliyetYasi.Size = new System.Drawing.Size(133, 20);
@@ -179,7 +179,7 @@
             // 
             // txtAracModel
             // 
-            this.txtAracModel.Location = new System.Drawing.Point(225, 74);
+            this.txtAracModel.Location = new System.Drawing.Point(199, 82);
             this.txtAracModel.MaxLength = 50;
             this.txtAracModel.Name = "txtAracModel";
             this.txtAracModel.Size = new System.Drawing.Size(133, 20);
@@ -187,7 +187,7 @@
             // 
             // txtAracMarka
             // 
-            this.txtAracMarka.Location = new System.Drawing.Point(225, 45);
+            this.txtAracMarka.Location = new System.Drawing.Point(199, 53);
             this.txtAracMarka.MaxLength = 50;
             this.txtAracMarka.Name = "txtAracMarka";
             this.txtAracMarka.Size = new System.Drawing.Size(133, 20);
@@ -196,7 +196,7 @@
             // txtAracID
             // 
             this.txtAracID.Enabled = false;
-            this.txtAracID.Location = new System.Drawing.Point(225, 16);
+            this.txtAracID.Location = new System.Drawing.Point(199, 24);
             this.txtAracID.Name = "txtAracID";
             this.txtAracID.Size = new System.Drawing.Size(133, 20);
             this.txtAracID.TabIndex = 0;
@@ -214,7 +214,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(422, 132);
+            this.label7.Location = new System.Drawing.Point(396, 140);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(99, 13);
             this.label7.TabIndex = 72;
@@ -222,7 +222,7 @@
             // 
             // txtGunlukKiralikFiyati
             // 
-            this.txtGunlukKiralikFiyati.Location = new System.Drawing.Point(528, 129);
+            this.txtGunlukKiralikFiyati.Location = new System.Drawing.Point(502, 137);
             this.txtGunlukKiralikFiyati.MaxLength = 20;
             this.txtGunlukKiralikFiyati.Name = "txtGunlukKiralikFiyati";
             this.txtGunlukKiralikFiyati.Size = new System.Drawing.Size(133, 20);
@@ -231,7 +231,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(422, 158);
+            this.label8.Location = new System.Drawing.Point(396, 166);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 13);
             this.label8.TabIndex = 71;
@@ -240,7 +240,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(422, 106);
+            this.label9.Location = new System.Drawing.Point(396, 114);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(67, 13);
             this.label9.TabIndex = 70;
@@ -249,7 +249,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(422, 77);
+            this.label10.Location = new System.Drawing.Point(396, 85);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(67, 13);
             this.label10.TabIndex = 69;
@@ -258,7 +258,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(422, 48);
+            this.label11.Location = new System.Drawing.Point(396, 56);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(68, 13);
             this.label11.TabIndex = 68;
@@ -267,7 +267,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(422, 19);
+            this.label12.Location = new System.Drawing.Point(396, 27);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(48, 13);
             this.label12.TabIndex = 67;
@@ -275,7 +275,7 @@
             // 
             // txtAitOlduguSirketID
             // 
-            this.txtAitOlduguSirketID.Location = new System.Drawing.Point(528, 155);
+            this.txtAitOlduguSirketID.Location = new System.Drawing.Point(502, 163);
             this.txtAitOlduguSirketID.MaxLength = 150;
             this.txtAitOlduguSirketID.Name = "txtAitOlduguSirketID";
             this.txtAitOlduguSirketID.Size = new System.Drawing.Size(133, 20);
@@ -283,7 +283,7 @@
             // 
             // txtKoltukSayisi
             // 
-            this.txtKoltukSayisi.Location = new System.Drawing.Point(528, 103);
+            this.txtKoltukSayisi.Location = new System.Drawing.Point(502, 111);
             this.txtKoltukSayisi.MaxLength = 20;
             this.txtKoltukSayisi.Name = "txtKoltukSayisi";
             this.txtKoltukSayisi.Size = new System.Drawing.Size(133, 20);
@@ -291,7 +291,7 @@
             // 
             // txtBagajHacmi
             // 
-            this.txtBagajHacmi.Location = new System.Drawing.Point(528, 74);
+            this.txtBagajHacmi.Location = new System.Drawing.Point(502, 82);
             this.txtBagajHacmi.MaxLength = 50;
             this.txtBagajHacmi.Name = "txtBagajHacmi";
             this.txtBagajHacmi.Size = new System.Drawing.Size(133, 20);
@@ -299,7 +299,7 @@
             // 
             // txtAirBagSayisi
             // 
-            this.txtAirBagSayisi.Location = new System.Drawing.Point(528, 45);
+            this.txtAirBagSayisi.Location = new System.Drawing.Point(502, 53);
             this.txtAirBagSayisi.MaxLength = 50;
             this.txtAirBagSayisi.Name = "txtAirBagSayisi";
             this.txtAirBagSayisi.Size = new System.Drawing.Size(133, 20);
@@ -307,7 +307,7 @@
             // 
             // txtAracKM
             // 
-            this.txtAracKM.Location = new System.Drawing.Point(528, 16);
+            this.txtAracKM.Location = new System.Drawing.Point(502, 24);
             this.txtAracKM.Name = "txtAracKM";
             this.txtAracKM.Size = new System.Drawing.Size(133, 20);
             this.txtAracKM.TabIndex = 6;

@@ -42,8 +42,6 @@ C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTf
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\AnadoluRental.CrossCutting.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\AnadoluRental.DataAccess.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\AnadoluRental.Models.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\EntityFramework.dll
-C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\Newtonsoft.Json.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\Configuration.dll
 C:\Users\PCX\Desktop\SOA\AnadoluRental\AnadoluRentalForm\AnadoluRentalForm.RESTfulApi\bin\Debug\AnadoluRental.Business.pdb

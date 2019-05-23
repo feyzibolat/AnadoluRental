@@ -127,6 +127,7 @@ namespace AnadoluRentalWeb.Controllers
         {
             if (Session["kull"] == null)
                 return RedirectToAction("Index", "Home");
+            
 
             return View();
         }
@@ -165,6 +166,62 @@ namespace AnadoluRentalWeb.Controllers
                         kullAdi = collection["kullAdi"],
                         kullSifre = collection["kullSifre"],
                         kullRolID = 4,
+                        kullSirketID = kullSirketID,
+                        Ad = collection["Ad"],
+                        Soyad = collection["Soyad"],
+                        TelNo = collection["TelNo"],
+                        Adres = collection["Adres"]
+                    };
+
+                    var serializedProduct = JsonConvert.SerializeObject(kullanici);
+                    var content = new StringContent(serializedProduct, Encoding.UTF8, "application/json");
+                    var result = await client.PostAsync("api/Kullanici", content);
+                    if (result.IsSuccessStatusCode)
+                        return RedirectToAction("Index");
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(LogTarget.File, ExceptionHelper.ExceptionToString(ex), true);
+                return View();
+            }
+        }
+
+        // POST: Kullanici/YeniOlustur
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> YeniOlusturAdmin(FormCollection collection)
+        {
+            if (Session["kull"] == null)
+                return RedirectToAction("Index", "Home");
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            try
+            {
+
+                int kullSirketID = 0;
+                Kullanici gelenK = (Kullanici)Session["kull"];
+                // Eğer ekleyen kişi adminse 0 değilse ekleyenin şirketIDsi müşterinin bağlı olduğu şirket IDsi olur.
+                if (gelenK.kullRolID != 1)
+                    kullSirketID = int.Parse(gelenK.kullSirketID.ToString());
+
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(Baseurl);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    Kullanici kullanici = new Kullanici()
+                    {
+                        kullAdi = collection["kullAdi"],
+                        kullSifre = collection["kullSifre"],
+                        kullRolID = int.Parse(collection["secilenRol"]),
                         kullSirketID = kullSirketID,
                         Ad = collection["Ad"],
                         Soyad = collection["Soyad"],
